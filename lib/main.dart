@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di.dart';
+import 'core/routes/app_router.dart';
 import 'core/utils/app_colors.dart';
 import 'core/utils/app_fonts.dart';
 import 'core/utils/app_texts.dart';
@@ -16,14 +17,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appRouter = getIt<AppRouter>();
+
     return ScreenUtilInit(
-      designSize: const Size(375, 812), // Standard Figma mobile design canvas size
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: AppTexts.appName,
           debugShowCheckedModeBanner: false,
+          routerConfig: appRouter.config(),
           theme: ThemeData(
             useMaterial3: true,
             fontFamily: AppFonts.fontFamily,
@@ -34,22 +38,8 @@ class MyApp extends StatelessWidget {
               surface: AppColors.scaffoldBackground,
             ),
           ),
-          home: const Scaffold(
-            body: Center(
-              child: Text(
-                'HabiSpace Real Estate App',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor,
-                ),
-              ),
-            ),
-          ),
         );
       },
     );
   }
 }
-
-
