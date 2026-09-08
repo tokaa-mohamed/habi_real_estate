@@ -1,51 +1,31 @@
-abstract class Failure {
+import 'package:equatable/equatable.dart';
+
+/// Base class for all failure results in the application.
+abstract class Failure extends Equatable {
   final String message;
-  Failure({required this.message});
+
+  const Failure({required this.message});
 
   @override
-  String toString() => '$runtimeType(message: $message)';
+  List<Object?> get props => [message];
 }
 
-class ApiFailure extends Failure {
-  ApiFailure({required super.message});
+class ServerFailure extends Failure {
+  const ServerFailure({required super.message});
 }
 
-class ServiceFailure extends Failure {
-  ServiceFailure({required super.message});
+class AuthFailure extends Failure {
+  const AuthFailure({required super.message});
 }
 
-class NoInternetFailure extends Failure {
-  NoInternetFailure({required super.message});
+class CacheFailure extends Failure {
+  const CacheFailure({required super.message});
 }
 
-class ServerException extends Failure {
-  ServerException(String message) : super(message: message);
+class NetworkFailure extends Failure {
+  const NetworkFailure({super.message = 'No internet connection'});
 }
 
-class CacheException extends Failure {
-  CacheException(String message) : super(message: message);
-}
-
-class ValidationException extends Failure {
-  ValidationException(String message) : super(message: message);
-}
-
-class AuthenticationException extends Failure {
-  AuthenticationException(String message) : super(message: message);
-}
-
-class ProductNotFoundException extends Failure {
-  ProductNotFoundException(String message) : super(message: message);
-}
-
-class CategoryNotFoundException extends Failure {
-  CategoryNotFoundException(String message) : super(message: message);
-}
-
-class OrderNotFoundException extends Failure {
-  OrderNotFoundException(String message) : super(message: message);
-}
-
-class PageNotFoundException extends Failure {
-  PageNotFoundException(String message) : super(message: message);
+class UnknownFailure extends Failure {
+  const UnknownFailure({required super.message});
 }

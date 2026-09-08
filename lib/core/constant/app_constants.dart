@@ -1,49 +1,27 @@
 class AppConstants {
-  // API Configuration
-  static const String KhamnyBaseUrl = 'https://washing-cars.storage-te.com';
+  // App Info
+  static const String appName = 'HabiSpace';
 
-  // Auth Endpoints
-  static const String registerEndpoint = '/api/auth/register';
-  static const String loginEndpoint = '/api/auth/login';
-  static const String sendResetPasswordOtpEndpoint =
-      '/api/auth/send-restpassword-otp';
-  static const String verifyResetPasswordOtpEndpoint =
-      '/api/auth/verify-restpassword-otp';
-  static const String changePasswordEndpoint =
-      '/api/auth/change-password-with-restpassword-otp';
+  // Supabase Configuration
+  // TODO: Replace with your actual Supabase Project URL and Anon Key
+  static const String supabaseUrl = 'https://lqhkeefmtatfygxbnepb.supabase.co';
+  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxaGtlZWZtdGF0ZnlneGJuZXBiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3MDkyMjYsImV4cCI6MjEwNDI4NTIyNn0.p8t5ws5iIzMhpTJgIdBi-WT1c2t5Iezj7JoH086VP_E';
 
-  // Dynamic Endpoints
-  static const String citiesEndpoint = '/api/dynamic/cities';
+  // Supabase Database Tables & Buckets
+  static const String profilesTable = 'profiles';
+  static const String avatarsBucket = 'avatars';
 
-  // Address Endpoints
-  static const String addressesEndpoint = '/api/addresses';
-  static String setDefaultAddressEndpoint(int id) =>
-      '/api/addresses/$id/set-default';
-
-  // Cars Endpoints
-  static const String carsEndpoint = '/api/cars';
-  static String setDefaultCarEndpoint(int id) => '/api/cars/$id/set-default';
-  static const String brandsEndpoint = '/api/brands';
-  static const String carTypesEndpoint = '/api/types';
-
-  // User Endpoints
-  static const String resendOtpEndpoint = '/api/user/resend-otp';
-  static const String verifyOtpEndpoint = '/api/user/verify-otp';
-  static const String refreshTokenEndpoint = '/api/user/refresh';
-
+  // Languages
   static const String arabicLangCode = 'ar';
   static const String englishLangCode = 'en';
 
-  static const String lastAuthProviderCacheKey = 'last_auth_provider';
+  // Cache & Storage Keys
+  static const String cachedUserKey = 'CACHED_USER';
+  static const String userTokenKey = 'USER_TOKEN';
 
-  // Error Messages
-  static const String networkErrorMessage = 'خطأ في الشبكة';
-  static const String serverErrorMessage = 'خطأ في الخادم';
-  static const String cacheErrorMessage = 'خطأ في التخزين المؤقت';
-  static const String unknownErrorMessage = 'خطأ غير معروف';
-
-  // Success Messages
-  static const String productAddedToCart = 'تمت إضافة المنتج إلى السلة بنجاح';
-  static const String orderPlacedSuccessfully = 'تم تأكيد الطلب بنجاح';
-  static const String dataLoadedSuccessfully = 'تم تحميل البيانات بنجاح';
+  // Default Error Messages
+  static const String networkErrorMessage = 'Network error. Please check your connection.';
+  static const String serverErrorMessage = 'Server error. Please try again later.';
+  static const String cacheErrorMessage = 'Cache error occurred.';
+  static const String unknownErrorMessage = 'An unknown error occurred.';
 }
