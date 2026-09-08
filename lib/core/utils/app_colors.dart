@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Color(0xFF0000FF);
-  static const Color secondaryColor = Color(0xFF0F1942);
-  static const Color blue = Color(0xFF00E6FF);
+  static const Color primaryColor = Color(0xFF1597A8);
+  static const Color secondaryColor = Color(0xFFD1D1D1);
+  static const Color lightblue = Color(0xFFBFF8FF);
   static const Color blue2 = Color(0xFF0053BC);
   static const Color green = Color(0xFF008D36);
   static const Color yello = Color(0xFFFAE700);
@@ -12,9 +12,19 @@ class AppColors {
   static const Color darkColor = Color(0xFF313131);
   static const Color lightGrayColor = Color(0xFFFAFAFA);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color white1 = Color(0xFFF8F8F8);
+  static const Color malachite = Color(0xFFF0FEE8);
+
+
+
+  
   static const Color black = Color(0xFF000000);
+  static const Color black1 = Color(0xFF1E1E1E);
+  static const Color blackgrey = Color(0xFF0D0C0D5C);
+  
+
   static const Color bordergrey = Color(0xFF777777);
-  static const Color grey = Color(0xFFB8B8B8);
+  static const Color grey = Color(0xFFEBEBEB);
   static const Color grey2 = Color(0xFF939AAD);
   static const Color greychip = Color(0xFFEFEFF0);
 
@@ -23,9 +33,9 @@ class AppColors {
   static const Color warningColor = Color(0xFFFFC107);
   static const Color infoColor = Color(0xFF17A2B8);
 
-  static const Color textPrimaryColor = darkColor;
-  static const Color textSecondaryColor = Color(0xFF6C757D);
-  static const Color textLightColor = Color(0xFF9E9E9E);
+  static const Color textPrimaryColor = black1;
+  static const Color textSecondaryColor = Color(0xFF0D0C0D5C);
+  static const Color textLightColor = Color(0xFFFAFAFA);
   static const Color textOnPrimaryColor = white;
   static const Color textOnSecondaryColor = darkColor;
 
