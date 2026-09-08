@@ -5,6 +5,28 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Assets {
   Assets._();
+
+  static const SvgGenImage logo = SvgGenImage('assets/logo.svg');
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
+}
+
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  final SvgGenImage appleIcon = const SvgGenImage(
+    'assets/icons/apple_icon.svg',
+  );
+  final SvgGenImage googleIcon = const SvgGenImage(
+    'assets/icons/google_icon.svg',
+  );
+}
+
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  final String poppinsBold = 'assets/fonts/Poppins-Bold.ttf';
+  final String poppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
 }
 
 class AssetGenImage {
@@ -70,6 +92,67 @@ class AssetGenImage {
 
   ImageProvider provider({AssetBundle? bundle, String? package}) {
     return AssetImage(_assetName, bundle: bundle, package: package);
+  }
+
+  Widget custom({
+    Key? key,
+    required Widget Function(BuildContext context, String assetPath) builder,
+  }) {
+    return Builder(
+      key: key,
+      builder: (context) => builder(context, _assetName),
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme? theme,
+    Clip clipBehavior = Clip.hardEdge,
+    Color? color,
+    BlendMode colorBlendMode = BlendMode.srcIn,
+    bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
   }
 
   Widget custom({
