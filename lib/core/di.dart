@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'constant/app_constants.dart';
+import 'routes/app_router.dart';
 import 'save data/save_data.dart';
 import 'security/security_helper.dart';
 import 'api/dio_helper.dart';
@@ -19,6 +20,8 @@ import '../features/auth/presentation/cubit/auth_cubit.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> initAppModule() async {
+  getIt.registerSingleton<AppRouter>(AppRouter());
+
   await Supabase.initialize(
     url: AppConstants.supabaseUrl,
     publishableKey: AppConstants.supabaseAnonKey,
