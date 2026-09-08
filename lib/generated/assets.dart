@@ -103,7 +103,6 @@ class $AssetsIconsGen {
   final SvgGenImage signInIcon = const SvgGenImage(
     'assets/icons/sign-in-icon.svg',
   );
-  final SvgGenImage splash = const SvgGenImage('assets/icons/splash.svg');
   final SvgGenImage starIcon = const SvgGenImage('assets/icons/star-icon.svg');
   final SvgGenImage timeIcon = const SvgGenImage('assets/icons/time-icon.svg');
   final SvgGenImage travelIcon = const SvgGenImage(

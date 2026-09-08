@@ -41,10 +41,7 @@ class _SplashPageState extends State<SplashPage> {
         child: SvgPicture.asset(
           AppAssets.logo,
           width: 180,
-          colorFilter: const ColorFilter.mode(
-            AppColors.white,
-            BlendMode.srcIn,
-          ),
+          colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
         ),
       ),
     );
