@@ -1,14 +1,24 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'constant/app_constants.dart';
 import 'save data/save_data.dart';
 import 'security/security_helper.dart';
 import 'api/dio_helper.dart';
 import 'api/internet_connection_checker.dart';
 
-
 final GetIt getIt = GetIt.instance;
 
+
 Future<void> initAppModule() async {
+  // 1. Initialize Supabase SDK
+  await Supabase.initialize(
+    url: AppConstants.supabaseUrl,
+    publishableKey: AppConstants.supabaseAnonKey,
+  );
+  getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
+
+  // 2. Cache & Security Helpers
   final cacheHelper = CacheHelper();
   await cacheHelper.init();
   getIt.registerLazySingleton<CacheHelper>(() => cacheHelper);
@@ -31,5 +41,4 @@ Future<void> initAppModule() async {
   getIt.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
   );
-
 }

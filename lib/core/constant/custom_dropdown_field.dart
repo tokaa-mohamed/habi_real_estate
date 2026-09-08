@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:drop_down_list/drop_down_list.dart';
-import 'package:drop_down_list/model/selected_list_item.dart';
-import '../../../../../core/utils/app_colors.dart';
-import 'custom_textformfield.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_styles.dart';
 
-class CustomDropdownField extends StatefulWidget {
+class CustomDropdownField extends StatelessWidget {
   final String label;
   final String? value;
   final List<String> items;
@@ -28,92 +25,44 @@ class CustomDropdownField extends StatefulWidget {
   });
 
   @override
-  State<CustomDropdownField> createState() => _CustomDropdownFieldState();
-}
-
-class _CustomDropdownFieldState extends State<CustomDropdownField> {
-  final TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _textEditingController.text = widget.value ?? '';
-  }
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width ?? 1.sw,
-      child: GestureDetector(
-        onTap: () => _showDropdown(),
-        child: AbsorbPointer(
-          child: CustomTextformfeild(
-            controller: _textEditingController,
-            keyboardType: TextInputType.text,
-            validator: widget.validator,
-            formFieldKey: widget.key,
-            labelText: widget.label,
-            hintText: widget.hintText ?? 'Select an option',
-            borderRadius: 48.r,
-            // suffixIcon:
-            //     widget.icon ??
-            //     Icon(
-            //       Icons.arrow_drop_down,
-            //       size: 24.w,
-            //     ),
-            onChanged: (value) {
-              // This will be called when the text changes, but we handle the main logic in _showDropdown
-            },
+    return SizedBox(
+      width: width ?? double.infinity,
+      child: DropdownButtonFormField<String>(
+        initialValue: items.contains(value) ? value : null,
+        validator: validator,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hintText ?? 'Select an option',
+          filled: true,
+          fillColor: AppColors.inputFieldFill,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.bordergrey),
+          ),
+
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.bordergrey),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: AppColors.primaryColor, width: 1.5),
           ),
         ),
+        icon: icon ?? const Icon(Icons.arrow_drop_down, color: AppColors.grey),
+        items: items.map((String item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(
+              item,
+              style: getRegularStyle(fontSize: 14, color: AppColors.darkColor),
+            ),
+          );
+        }).toList(),
       ),
     );
-  }
-
-  void _showDropdown() async {
-    List<SelectedListItem<String>> dropdownItems = widget.items
-        .map((item) => SelectedListItem<String>(data: item))
-        .toList();
-
-    await DropDownState<String>(
-      dropDown: DropDown<String>(
-        data: dropdownItems,
-        isDismissible: true,
-        bottomSheetTitle: Text(
-          widget.label,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
-        ),
-        submitButtonText: 'Done',
-        submitButtonStyle: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          textStyle: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        clearButtonText: 'Clear',
-        enableMultipleSelection: false,
-        onSelected: (selectedItems) {
-          if (selectedItems.isNotEmpty) {
-            setState(() {
-              _textEditingController.text = selectedItems.first.data;
-            });
-            widget.onChanged(selectedItems.first.data);
-          } else {
-            setState(() {
-              _textEditingController.text = '';
-            });
-            widget.onChanged(null);
-          }
-        },
-      ),
-    ).showModal(context);
   }
 }

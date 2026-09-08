@@ -1,84 +1,54 @@
 class AppTexts {
-  // Authentication
-  static const String confirmPassword = 'confirmPassword';
-  static const String sendOtp = 'sendOtp';
-  static const String resendOtp = 'resendOtp';
-  static const String backToLogin = 'backToLogin';
+  // Brand
+  static const String appName = 'HabiSpace';
 
-  // Field Labels and Hints
-  static const String passwordHint = 'passwordHint';
+  // Onboarding
+  static const String onboardingTitle1 = 'Find Your Perfect Home, Anywhere';
+  static const String onboardingSubtitle1 =
+      'Start your journey with a comfortable and reliable home search';
+  static const String continueButton = 'Continue';
+
+  // Sign In Screen
+  static const String signInAccount = 'Sign In Account';
+  static const String emailLabel = 'Email';
+  static const String emailHint = 'insert your email';
+  static const String passwordLabel = 'Password';
+  static const String passwordHint = 'insert your password';
+  static const String forgotPassword = 'Forgot Password?';
+  static const String loginButton = 'Login';
+  static const String orLoginWith = 'or login with';
+  static const String continueWithGoogle = 'Continue with Google';
+  static const String continueWithApple = 'Continue with Apple';
+  static const String dontHaveAccount = "Don't have an account? ";
+  static const String signUpLink = 'Sign Up';
+
+  // Disclaimers & Terms
+  static const String bySigningInPrefix = 'By signing in, you agree to our ';
+  static const String termsAndConditions = 'Terms and Conditions.';
+  static const String learnHowWeUsePrefix = '\nLearn how we use your data ';
+  static const String privacyPolicy = 'in our Privacy Policy.';
+
+  // Sign Up Screen
+  static const String createAccount = 'Create Account';
+  static const String fullNameLabel = 'Full Name';
+  static const String fullNameHint = 'insert your full name';
+  static const String confirmPasswordLabel = 'Confirm Password';
+  static const String confirmPasswordHint = 're-enter your password';
+  static const String alreadyHaveAccount = 'Already have an account? ';
+  static const String loginLink = 'Sign In';
 
   // Validation Messages
-  static const String pleaseEnterPhone = 'pleaseEnterPhone';
-  static const String pleaseEnterEmail = 'pleaseEnterEmail';
-  static const String pleaseEnterPassword = 'pleaseEnterPassword';
-  static const String pleaseEnterName = 'pleaseEnterName';
-  static const String pleaseEnterConfirmPassword = 'pleaseEnterConfirmPassword';
-  static const String validPhoneRequired = 'validPhoneRequired';
-  static const String validEmailRequired = 'validEmailRequired';
-  static const String validPasswordRequired = 'validPasswordRequired';
-  static const String validNameRequired = 'validNameRequired';
-  static const String passwordMismatch = 'passwordMismatch';
+  static const String pleaseEnterEmail = 'Please enter your email';
+  static const String pleaseEnterValidEmail = 'Please enter a valid email address';
+  static const String pleaseEnterPassword = 'Please enter your password';
+  static const String passwordMinLength = 'Password must be at least 6 characters';
+  static const String pleaseEnterName = 'Please enter your full name';
+  static const String passwordsDoNotMatch = 'Passwords do not match';
 
-  // Login Screen
-  static const String loginSubtitle = 'loginSubtitle';
-  static const String loginAsGuest = 'loginAsGuest';
-  static const String phoneLabel = 'phoneLabel';
-  static const String phoneHintLogin = 'phoneHintLogin';
-  static const String rememberMe = 'rememberMe';
-  static const String forgotPassword = 'forgotPassword';
-  static const String loginButton = 'loginButton';
-  static const String signup = 'signup';
-
-  // OTP Screen
-  static const String otpScreenTitle = 'otpScreenTitle';
-  static const String otpScreenSubtitle = 'otpScreenSubtitle';
-  static const String nextButton = 'nextButton';
-
-  // OTP Verify Screen
-  static const String otpVerifyTitle = 'otpVerifyTitle';
-  static const String otpVerifySubtitle = 'otpVerifySubtitle';
-  static const String verifyButton = 'verifyButton';
-  static const String didntReceiveCode = 'didntReceiveCode';
-  static const String resendWithin = 'resendWithin';
-
-  // Done Screen
-  static const String verifiedSuccess = 'verifiedSuccess';
-
-  // Signup Screen
-  static const String nameLabel = 'nameLabel';
-  static const String nameHint = 'nameHint';
-  static const String emailLabel = 'emailLabel';
-  static const String emailHintSignup = 'emailHintSignup';
-  static const String phoneSignupLabel = 'phoneSignupLabel';
-  static const String phoneSignupHint = 'phoneSignupHint';
-  static const String passwordSignupLabel = 'passwordSignupLabel';
-  static const String termsPrefix = 'termsPrefix';
-  static const String termsLink = 'termsLink';
-  static const String termsSuffix = 'termsSuffix';
-  static const String subscribeButton = 'subscribeButton';
-  static const String alreadyHaveAccountText = 'alreadyHaveAccountText';
-  static const String loginLink = 'loginLink';
-
-  // Forgot Password
-  static const String forgotPasswordTitle = 'forgotPasswordTitle';
-  static const String forgotPasswordSubtitle = 'forgotPasswordSubtitle';
-  static const String newPassword = 'newPassword';
-  static const String resetPasswordSubtitle = 'resetPasswordSubtitle';
-  static const String newPasswordLabel = 'newPasswordLabel';
-  static const String confirmPasswordLabel = 'confirmPasswordLabel';
-  static const String saveButton = 'saveButton';
-  static const String confirm = 'confirm';
-
-  // Signup Screen Extra
-  static const String profileImageOptional = 'profileImageOptional';
-  static const String cityLabel = 'cityLabel';
-  static const String cityHint = 'cityHint';
-  static const String noCitiesFound = 'noCitiesFound';
-
-  // Language Selection
-  static const String selectLanguage = 'selectLanguage';
-  static const String selectLanguageSubtitle = 'selectLanguageSubtitle';
-  static const String arabicLanguage = 'arabicLanguage';
-  static const String englishLanguage = 'englishLanguage';
+  // Forgot Password & Reset
+  static const String forgotPasswordTitle = 'Reset Password';
+  static const String forgotPasswordSubtitle =
+      'Enter your email address to receive a password reset link';
+  static const String sendResetLink = 'Send Reset Link';
+  static const String backToLogin = 'Back to Login';
 }

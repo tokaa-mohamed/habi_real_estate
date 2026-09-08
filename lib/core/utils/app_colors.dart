@@ -1,41 +1,39 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryColor = Color(0xFF1597A8);
-  static const Color secondaryColor = Color(0xFFD1D1D1);
-  static const Color lightblue = Color(0xFFBFF8FF);
-  static const Color blue2 = Color(0xFF0053BC);
-  static const Color green = Color(0xFF008D36);
-  static const Color yello = Color(0xFFFAE700);
-  static const Color pink = Color(0xFFFF4596);
+  // HabiSpace Primary Brand Palette
+  static const Color primaryColor = Color(0xFF139FA8); // HabiSpace Teal
+  static const Color primaryColorDarkAccent = Color(0xFF0E7A82);
+  static const Color secondaryColor = Color(0xFF1E1E1E); // Dark Slate / Apple Button
+  static const Color scaffoldBackground = Color(0xFFFAF9F6); // Soft off-white background
 
-  static const Color darkColor = Color(0xFF313131);
+  static const Color darkColor = Color(0xFF1A1A1A);
   static const Color lightGrayColor = Color(0xFFFAFAFA);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color white1 = Color(0xFFF8F8F8);
-  static const Color malachite = Color(0xFFF0FEE8);
-
-
-
-  
   static const Color black = Color(0xFF000000);
-  static const Color black1 = Color(0xFF1E1E1E);
-  static const Color blackgrey = Color(0xFF0D0C0D5C);
-  
+  static const Color bordergrey = Color(0xFFEAEAEA);
+  static const Color grey = Color(0xFF9E9E9E);
+  static const Color grey2 = Color(0xFF757575);
+  static const Color inputFieldFill = Color(0xFFFAFAFA);
 
-  static const Color bordergrey = Color(0xFF777777);
-  static const Color grey = Color(0xFFEBEBEB);
-  static const Color grey2 = Color(0xFF939AAD);
-  static const Color greychip = Color(0xFFEFEFF0);
+  // Social Buttons
+  static const Color googleBtnBackground = Color(0xFFECECEC);
+  static const Color appleBtnBackground = Color(0xFF1E1E1E);
+
+  // Legacy color references for compatibility
+  static const Color blue = primaryColor;
+  static const Color blue2 = primaryColorDarkAccent;
+  static const Color pink = primaryColor;
+  static const Color yello = primaryColorDarkAccent;
 
   static const Color errorColor = Color(0xFFDC3545);
   static const Color successColor = Color(0xFF28A745);
   static const Color warningColor = Color(0xFFFFC107);
   static const Color infoColor = Color(0xFF17A2B8);
 
-  static const Color textPrimaryColor = black1;
-  static const Color textSecondaryColor = Color(0xFF0D0C0D5C);
-  static const Color textLightColor = Color(0xFFFAFAFA);
+  static const Color textPrimaryColor = darkColor;
+  static const Color textSecondaryColor = Color(0xFF6C757D);
+  static const Color textLightColor = Color(0xFF9E9E9E);
   static const Color textOnPrimaryColor = white;
   static const Color textOnSecondaryColor = darkColor;
 
@@ -78,11 +76,12 @@ class AppColors {
   static const Color darkTextPrimaryColor = Color(0xFFFFFFFF);
   static const Color darkTextSecondaryColor = Color(0xFFB0B0B0);
 
-  static const LinearGradient blueGradient = LinearGradient(
-    colors: [blue, blue2],
+  static const LinearGradient tealGradient = LinearGradient(
+    colors: [primaryColor, primaryColorDarkAccent],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+  static const LinearGradient blueGradient = tealGradient;
 
   static Color getAdaptiveBorderColor(BuildContext context) {
     return borderColor;

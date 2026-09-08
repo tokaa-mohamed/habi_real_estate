@@ -34,22 +34,27 @@ class _PinCodeFieldsState extends State<PinCodeFields> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialPinField(
+    return PinCodeTextField(
+      appContext: context,
       length: widget.length,
+      controller: _controller,
       enabled: widget.enabled,
       onChanged: widget.onChanged,
       onCompleted: widget.onCompleted,
       keyboardType: TextInputType.number,
       autoFocus: true,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      theme: MaterialPinTheme(
-        shape: MaterialPinShape.circle,
-        borderColor: AppColors.pink,
-        cursorColor: AppColors.pink,
-        fillColor: AppColors.yello,
-        disabledColor: AppColors.bordergrey,
-        cellSize: const Size(56, 56),
-        spacing: 8.0,
+      textStyle: widget.textStyle,
+      pinTheme: PinTheme(
+        shape: PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(8),
+        fieldHeight: 56,
+        fieldWidth: 48,
+        activeColor: AppColors.primaryColor,
+        selectedColor: AppColors.primaryColor,
+        inactiveColor: AppColors.bordergrey,
+        activeFillColor: AppColors.inputFieldFill,
+        selectedFillColor: AppColors.white,
+        inactiveFillColor: AppColors.inputFieldFill,
       ),
     );
   }
