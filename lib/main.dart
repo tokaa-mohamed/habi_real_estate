@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812), // Standard Figma mobile design canvas size
       minTextAdapt: true,
       splitScreenMode: true,
+
       builder: (context, child) {
         return MaterialApp(
           title: AppTexts.appName,

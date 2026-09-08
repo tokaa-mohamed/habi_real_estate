@@ -15,7 +15,6 @@ class UserEntity extends Equatable {
     this.createdAt,
   });
 
-
   @override
   List<Object?> get props => [
         id,
