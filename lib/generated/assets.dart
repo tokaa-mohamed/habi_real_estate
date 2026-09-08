@@ -5,6 +5,129 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Assets {
   Assets._();
+
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
+}
+
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  final SvgGenImage bedroomIcon = const SvgGenImage(
+    'assets/icons/Bedroom-icon.svg',
+  );
+  final SvgGenImage appleIcon = const SvgGenImage(
+    'assets/icons/apple-icon.svg',
+  );
+  final SvgGenImage arrowLeft = const SvgGenImage(
+    'assets/icons/arrow-left.svg',
+  );
+  final SvgGenImage arrowRight = const SvgGenImage(
+    'assets/icons/arrow-right.svg',
+  );
+  final SvgGenImage backIcon = const SvgGenImage('assets/icons/back-icon.svg');
+  final SvgGenImage balaconyIcon = const SvgGenImage(
+    'assets/icons/balacony-icon.svg',
+  );
+  final SvgGenImage bathroomIcon = const SvgGenImage(
+    'assets/icons/bathroom-icon.svg',
+  );
+  final SvgGenImage callIcon = const SvgGenImage('assets/icons/call-icon.svg');
+  final SvgGenImage changePasswordIcon = const SvgGenImage(
+    'assets/icons/change-password-icon.svg',
+  );
+  final SvgGenImage chatIcon = const SvgGenImage('assets/icons/chat-icon.svg');
+  final SvgGenImage dateIcon = const SvgGenImage('assets/icons/date-icon.svg');
+  final SvgGenImage deleteIcon = const SvgGenImage(
+    'assets/icons/delete-icon.svg',
+  );
+  final SvgGenImage editIcon = const SvgGenImage('assets/icons/edit-icon.svg');
+  final SvgGenImage errorIcon = const SvgGenImage(
+    'assets/icons/error-icon.svg',
+  );
+  final SvgGenImage favourite = const SvgGenImage('assets/icons/favourite.svg');
+  final SvgGenImage fluentChat = const SvgGenImage(
+    'assets/icons/fluent-chat.svg',
+  );
+  final AssetGenImage googleIcon = const AssetGenImage(
+    'assets/icons/google-icon.png',
+  );
+  final SvgGenImage greenCheckIcon = const SvgGenImage(
+    'assets/icons/green-check-icon.svg',
+  );
+  final SvgGenImage gymIcon = const SvgGenImage('assets/icons/gym-icon.svg');
+  final SvgGenImage historyIcon = const SvgGenImage(
+    'assets/icons/history-icon.svg',
+  );
+  final SvgGenImage homeIcon = const SvgGenImage('assets/icons/home-icon.svg');
+  final SvgGenImage kitchenIcon = const SvgGenImage(
+    'assets/icons/kitchen-icon.svg',
+  );
+  final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like-icon.svg');
+  final SvgGenImage locationIcon = const SvgGenImage(
+    'assets/icons/location-icon.svg',
+  );
+  final SvgGenImage loungeArea = const SvgGenImage(
+    'assets/icons/lounge-area.svg',
+  );
+  final SvgGenImage menuIcon = const SvgGenImage('assets/icons/menu-icon.svg');
+  final SvgGenImage myAccountIcon = const SvgGenImage(
+    'assets/icons/my-account-icon.svg',
+  );
+  final SvgGenImage nextIcon = const SvgGenImage('assets/icons/next-icon.svg');
+  final SvgGenImage noRoomIcon = const SvgGenImage(
+    'assets/icons/no-room-icon.svg',
+  );
+  final SvgGenImage notification = const SvgGenImage(
+    'assets/icons/notification.svg',
+  );
+  final SvgGenImage pIcon = const SvgGenImage('assets/icons/p-icon.svg');
+  final SvgGenImage paymentIcon = const SvgGenImage(
+    'assets/icons/payment-icon.svg',
+  );
+  final SvgGenImage person = const SvgGenImage('assets/icons/person.svg');
+  final SvgGenImage personalInfoIcon = const SvgGenImage(
+    'assets/icons/personal-info-icon.svg',
+  );
+  final SvgGenImage profileNotificationIcon = const SvgGenImage(
+    'assets/icons/profile-notification-icon.svg',
+  );
+  final SvgGenImage rentIcon = const SvgGenImage('assets/icons/rent-icon.svg');
+  final SvgGenImage signInIcon = const SvgGenImage(
+    'assets/icons/sign-in-icon.svg',
+  );
+  final SvgGenImage splash = const SvgGenImage('assets/icons/splash.svg');
+  final SvgGenImage starIcon = const SvgGenImage('assets/icons/star-icon.svg');
+  final SvgGenImage timeIcon = const SvgGenImage('assets/icons/time-icon.svg');
+  final SvgGenImage travelIcon = const SvgGenImage(
+    'assets/icons/travel-icon.svg',
+  );
+}
+
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  final String poppinsBlack = 'assets/fonts/Poppins-Black.ttf';
+  final String poppinsBlackItalic = 'assets/fonts/Poppins-BlackItalic.ttf';
+  final String poppinsBold = 'assets/fonts/Poppins-Bold.ttf';
+  final String poppinsBoldItalic = 'assets/fonts/Poppins-BoldItalic.ttf';
+  final String poppinsExtraBold = 'assets/fonts/Poppins-ExtraBold.ttf';
+  final String poppinsExtraBoldItalic =
+      'assets/fonts/Poppins-ExtraBoldItalic.ttf';
+  final String poppinsExtraLight = 'assets/fonts/Poppins-ExtraLight.ttf';
+  final String poppinsExtraLightItalic =
+      'assets/fonts/Poppins-ExtraLightItalic.ttf';
+  final String poppinsItalic = 'assets/fonts/Poppins-Italic.ttf';
+  final String poppinsLight = 'assets/fonts/Poppins-Light.ttf';
+  final String poppinsLightItalic = 'assets/fonts/Poppins-LightItalic.ttf';
+  final String poppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
+  final String poppinsMediumItalic = 'assets/fonts/Poppins-MediumItalic.ttf';
+  final String poppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
+  final String poppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
+  final String poppinsSemiBoldItalic =
+      'assets/fonts/Poppins-SemiBoldItalic.ttf';
+  final String poppinsThin = 'assets/fonts/Poppins-Thin.ttf';
+  final String poppinsThinItalic = 'assets/fonts/Poppins-ThinItalic.ttf';
 }
 
 class AssetGenImage {
@@ -70,6 +193,67 @@ class AssetGenImage {
 
   ImageProvider provider({AssetBundle? bundle, String? package}) {
     return AssetImage(_assetName, bundle: bundle, package: package);
+  }
+
+  Widget custom({
+    Key? key,
+    required Widget Function(BuildContext context, String assetPath) builder,
+  }) {
+    return Builder(
+      key: key,
+      builder: (context) => builder(context, _assetName),
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme? theme,
+    Clip clipBehavior = Clip.hardEdge,
+    Color? color,
+    BlendMode colorBlendMode = BlendMode.srcIn,
+    bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
   }
 
   Widget custom({
