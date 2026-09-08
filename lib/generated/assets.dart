@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Assets {
   Assets._();
 
-  static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const SvgGenImage logo = SvgGenImage('assets/logo.svg');
   static const $AssetsIconsGen icons = $AssetsIconsGen();
 }
 
@@ -102,32 +102,6 @@ class $AssetsIconsGen {
   final SvgGenImage travelIcon = const SvgGenImage(
     'assets/icons/travel-icon.svg',
   );
-}
-
-class $AssetsFontsGen {
-  const $AssetsFontsGen();
-
-  final String poppinsBlack = 'assets/fonts/Poppins-Black.ttf';
-  final String poppinsBlackItalic = 'assets/fonts/Poppins-BlackItalic.ttf';
-  final String poppinsBold = 'assets/fonts/Poppins-Bold.ttf';
-  final String poppinsBoldItalic = 'assets/fonts/Poppins-BoldItalic.ttf';
-  final String poppinsExtraBold = 'assets/fonts/Poppins-ExtraBold.ttf';
-  final String poppinsExtraBoldItalic =
-      'assets/fonts/Poppins-ExtraBoldItalic.ttf';
-  final String poppinsExtraLight = 'assets/fonts/Poppins-ExtraLight.ttf';
-  final String poppinsExtraLightItalic =
-      'assets/fonts/Poppins-ExtraLightItalic.ttf';
-  final String poppinsItalic = 'assets/fonts/Poppins-Italic.ttf';
-  final String poppinsLight = 'assets/fonts/Poppins-Light.ttf';
-  final String poppinsLightItalic = 'assets/fonts/Poppins-LightItalic.ttf';
-  final String poppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
-  final String poppinsMediumItalic = 'assets/fonts/Poppins-MediumItalic.ttf';
-  final String poppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
-  final String poppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
-  final String poppinsSemiBoldItalic =
-      'assets/fonts/Poppins-SemiBoldItalic.ttf';
-  final String poppinsThin = 'assets/fonts/Poppins-Thin.ttf';
-  final String poppinsThinItalic = 'assets/fonts/Poppins-ThinItalic.ttf';
 }
 
 class AssetGenImage {
