@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di.dart';
 import 'core/utils/app_colors.dart';
+import 'core/utils/app_fonts.dart';
 import 'core/utils/app_texts.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: true,
+            fontFamily: AppFonts.fontFamily,
             scaffoldBackgroundColor: AppColors.scaffoldBackground,
             colorScheme: ColorScheme.fromSeed(
               seedColor: AppColors.primaryColor,
