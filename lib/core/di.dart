@@ -16,6 +16,12 @@ import '../features/auth/domain/usecases/logout_usecase.dart';
 import '../features/auth/domain/usecases/reset_password_usecase.dart';
 import '../features/auth/domain/usecases/signup_usecase.dart';
 import '../features/auth/presentation/cubit/auth_cubit.dart';
+import '../features/map/data/datasources/map_remote_data_source.dart';
+import '../features/map/data/repositories/map_repository_impl.dart';
+import '../features/map/domain/repositories/map_repository.dart';
+import '../features/map/domain/usecases/get_property_location_by_id_usecase.dart';
+import '../features/map/domain/usecases/get_property_locations_usecase.dart';
+import '../features/map/presentation/cubit/map_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -75,6 +81,27 @@ Future<void> initAppModule() async {
       logoutUseCase: getIt<LogoutUseCase>(),
       getCurrentUserUseCase: getIt<GetCurrentUserUseCase>(),
       resetPasswordUseCase: getIt<ResetPasswordUseCase>(),
+    ),
+  );
+
+  // Map Feature Dependencies
+  getIt.registerLazySingleton<MapRemoteDataSource>(
+    () => MapRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+  );
+
+  getIt.registerLazySingleton<MapRepository>(
+    () => MapRepositoryImpl(
+      remoteDataSource: getIt<MapRemoteDataSource>(),
+      networkInfo: getIt<NetworkInfo>(),
+    ),
+  );
+
+  getIt.registerLazySingleton(() => GetPropertyLocationsUseCase(getIt<MapRepository>()));
+  getIt.registerLazySingleton(() => GetPropertyLocationByIdUseCase(getIt<MapRepository>()));
+
+  getIt.registerFactory(
+    () => MapCubit(
+      getPropertyLocationsUseCase: getIt<GetPropertyLocationsUseCase>(),
     ),
   );
 }
