@@ -1,18 +1,34 @@
-import 'package:dartz/dartz.dart';
-import 'package:real_estate/core/errors/failure.dart';
 import 'package:real_estate/features/profile_page/data/model/profile_data_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileDatasource {
-  Future<Either<Failure, ProfileDataModel>> readProfileData() async {
-    final supabase = Supabase.instance.client;
-    String uid = supabase.auth.currentUser!.id;
+  final SupabaseClient supabase;
+
+  ProfileDatasource({required this.supabase});
+  Future<ProfileDataModel> readProfileData() async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      throw Exception('User session not found. Please log in again.');
+    }
     final response = await supabase
         .from("profiles")
         .select()
-        .eq("id", uid)
-        .select()
+        .eq("id", user.id)
         .single();
-    return Right(ProfileDataModel.fromJson(response));
+    return ProfileDataModel.fromJson(response);
+  }
+
+  Future<ProfileDataModel> updateProfile(
+    String? full_name,
+    String? location,
+    String? avatar_url,
+  ) async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      throw Exception('User session not found. Please log in again.');
+    }
+    final response = await supabase.from("profiles").update({"full_name":full_name,"location":location,"avatar_url":avatar_url}).eq("id", user.id);
+
+    return ProfileDataModel.fromJson(response);
   }
 }
