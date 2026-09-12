@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:real_estate/features/profile_page/domain/usecases/get_profile_data_usecase.dart';
+import 'package:real_estate/features/profile_page/domain/usecases/update_profile_data_usecase.dart';
+import 'package:real_estate/features/profile_page/presentation/cubit/profile_page_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'constant/app_constants.dart';
 import 'save data/save_data.dart';
@@ -8,7 +11,6 @@ import 'api/dio_helper.dart';
 import 'api/internet_connection_checker.dart';
 
 final GetIt getIt = GetIt.instance;
-
 
 Future<void> initAppModule() async {
   // 1. Initialize Supabase SDK
@@ -40,5 +42,12 @@ Future<void> initAppModule() async {
 
   getIt.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
+  );
+  // Usecases
+  getIt.registerFactory<ProfilePageCubit>(
+    () => ProfilePageCubit(
+      getProfileDataUsecase: getIt<GetProfileDataUsecase>(),
+      updateProfileUseCase: getIt<UpdateProfileUseCase>(),
+    ),
   );
 }

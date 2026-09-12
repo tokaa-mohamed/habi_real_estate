@@ -18,4 +18,8 @@ class FailGetDataState extends ProfilePageState {
   FailGetDataState({required this.errorMessege});
 }
 
-class ProfilePageUpdateState extends ProfilePageState {}
+class ProfilePageUpdateState extends ProfilePageState {
+  final DataOfProfileEntity updatesDataOfUser;
+
+  ProfilePageUpdateState({required this.updatesDataOfUser});
+}
