@@ -35,6 +35,7 @@ dependencies:
 
   # Supabase & Auth
   supabase_flutter: ^2.8.3
+  panorama: ^0.4.1
 
   # State Management & Architecture
   flutter_bloc: ^8.1.6
@@ -68,10 +69,14 @@ dependencies:
   firebase_core: ^3.12.1
   firebase_messaging: ^15.2.4
   flutter_local_notifications: ^18.0.1
+  auto_route: ^7.8.4
 
 dev_dependencies:
+   
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.8  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -92,8 +97,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -118,6 +123,6 @@ flutter:
           weight: 600
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700  
-          
+
             # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -4,6 +4,13 @@ class AppColors {
   // HabiSpace Primary Brand Palette
   static const Color primaryColor = Color(0xFF139FA8); // HabiSpace Teal
   static const Color primaryColorDarkAccent = Color(0xFF0E7A82);
+  //new
+   static const Color lightPrimaryColor = Color(0xFFBFF8FF);
+   //new
+   static const Color lightGrey = Color(0xFFF8F8F8);
+
+   
+  
   static const Color secondaryColor = Color(0xFF1E1E1E); // Dark Slate / Apple Button
   static const Color scaffoldBackground = Color(0xFFFAF9F6); // Soft off-white background
 
