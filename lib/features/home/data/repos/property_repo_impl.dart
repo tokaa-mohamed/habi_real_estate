@@ -46,9 +46,14 @@ class PropertyDetailsRepositoryImpl implements PropertyDetailsRepository {
       kitchen360Url: model.kitchen360Url,
       bedroom360Url: model.bedroom360Url,
       bathroom360Url: model.bathroom360Url,
+
+      agentName: model.agentName,
+      agentPhone: model.agentPhone,
+      agentImage: model.agentImage,
+      agentRole: model.agentRole,
     );
   }
-  
+
 @override
 Future<List<PropertyEntity>> getSuggestedProperties({
   required int currentPropertyId,

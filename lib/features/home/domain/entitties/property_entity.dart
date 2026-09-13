@@ -28,6 +28,13 @@ final String? livingRoom360Url;
   final String? bedroom360Url;
   final String? bathroom360Url;
 
+  final double? latitude;
+  final double? longitude;
+  final String? agentName;
+  final String? agentPhone;
+  final String? agentImage;
+  final String? agentRole;
+
   const PropertyEntity({
     required this.id,
     required this.title,
@@ -54,6 +61,12 @@ final String? livingRoom360Url;
     this.kitchen360Url,
     this.bedroom360Url,
     this.bathroom360Url,
+    this.latitude,
+    this.longitude,
+    this.agentName,
+    this.agentPhone,
+    this.agentImage,
+    this.agentRole,
   });
 
   @override

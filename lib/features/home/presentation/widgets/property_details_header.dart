@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
 
-// 1. الهيدر العلوي للصورة الرئيسية مع تفاصيل العقار
 class PropertyHeaderWidget extends StatelessWidget {
   final dynamic property;
   const PropertyHeaderWidget({super.key, required this.property});
@@ -33,24 +31,39 @@ class PropertyHeaderWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    icon: SvgPicture.asset('assets/icons/arrow-left.svg', width: 24, height: 24),
-                    onPressed: () => context.router.pop(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    border: Border.all(color: Colors.white),
+                    shape: BoxShape.circle,
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: IconButton(
+                      icon: SvgPicture.asset('assets/icons/arrow-left.svg', width: 24, height: 24),
+                      onPressed: () => context.router.pop(),
+                    ),
                   ),
                 ),
                 Text(
                   "Property Detail",
                   style: getBoldStyle(fontSize: 16, color: Colors.white),
                 ),
-                CircleAvatar(
-                  backgroundColor: Colors.white,
+                              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    border: Border.all(color: Colors.white),
+                    shape: BoxShape.circle,
+                  ),
+
+             child:    CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   child: IconButton(
                     icon: SvgPicture.asset('assets/icons/arrow-right.svg', width: 24, height: 24),
                     onPressed: () => context.router.pop(),
                   ),
                 ),
+            ),
               ],
             ),
           ),

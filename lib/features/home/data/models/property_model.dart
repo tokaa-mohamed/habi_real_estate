@@ -28,6 +28,12 @@ class PropertyModel {
   final String? bedroom360Url;
   final String? bathroom360Url;
 
+  // حقول الـ Agent الجديدة
+  final String? agentName;
+  final String? agentPhone;
+  final String? agentImage;
+  final String? agentRole;
+
   PropertyModel({
     required this.id,
     required this.title,
@@ -55,8 +61,13 @@ class PropertyModel {
     this.kitchen360Url,
     this.bedroom360Url,
     this.bathroom360Url,
+    this.agentName,
+    this.agentPhone,
+    this.agentImage,
+    this.agentRole,
   });
-factory PropertyModel.fromJson(Map<String, dynamic> json) {
+
+  factory PropertyModel.fromJson(Map<String, dynamic> json) {
     return PropertyModel(
       id: json['id'],
       title: json['title'] ?? '',
@@ -78,7 +89,6 @@ factory PropertyModel.fromJson(Map<String, dynamic> json) {
       reviewsCount: json['reviews_count'] ?? 0,
       imagesGallery: List<String>.from(json['images_gallery'] ?? []),
       
-      // قراءة الصور من الأعمدة المباشرة في Supabase مع وضع الـ mainImageUrl كبديل (Fallback) لو الصورة فاضية
       front360Url: json['front_image_url'] ?? json['main_image_url'],
       back360Url: json['back_image_url'] ?? json['main_image_url'],
       side360Url: json['side_image_url'] ?? json['main_image_url'],
@@ -86,6 +96,11 @@ factory PropertyModel.fromJson(Map<String, dynamic> json) {
       kitchen360Url: json['kitchen_image_url'] ?? json['main_image_url'],
       bedroom360Url: json['bedroom_image_url'] ?? json['main_image_url'],
       bathroom360Url: json['outdoor_image_url'] ?? json['main_image_url'],
+      
+      agentName: json['agent_name'],
+      agentPhone: json['agent_phone'],
+      agentImage: json['agent_image'],
+      agentRole: json['agent_role'],
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
 import 'package:real_estate/features/home/presentation/widgets/category-list.dart';
-import 'package:real_estate/features/home/presentation/widgets/property_ccard.dart';
+import 'package:real_estate/features/home/presentation/widgets/property_card.dart';
 import '../../../../core/di.dart'; 
 import '../cubit/home_cubit.dart';
 import '../widgets/home_header.dart';

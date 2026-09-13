@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
+import 'package:real_estate/features/home/domain/entitties/property_entity.dart';
 
 class ListingAgentWidget extends StatelessWidget {
-  const ListingAgentWidget({super.key});
+  final PropertyEntity property;
+
+  const ListingAgentWidget({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
+    final agentName = property.agentName ?? "Jenny Wilson";
+    final agentRole = property.agentRole ?? "Property Owner";
+    final agentImage = property.agentImage ?? 'https://i.imgur.com/8Km9tLL.jpg';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,19 +24,19 @@ class ListingAgentWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 24,
-                backgroundImage: NetworkImage('https://i.imgur.com/8Km9tLL.jpg'),
+                backgroundImage: NetworkImage(agentImage),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Jenny Wilson", style: getBoldStyle(fontSize: 14, color: AppColors.black)),
+                    Text(agentName, style: getBoldStyle(fontSize: 14, color: AppColors.black)),
                     const SizedBox(height: 2),
                     Text(
-                      "Owner Sunnyslade House",
+                      agentRole,
                       style: TextStyle(color: AppColors.secondaryColor.withOpacity(0.5), fontSize: 12),
                     ),
                   ],
