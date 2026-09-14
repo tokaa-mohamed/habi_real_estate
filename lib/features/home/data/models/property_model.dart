@@ -19,7 +19,6 @@ class PropertyModel {
   final int reviewsCount;
   final List<String> imagesGallery; 
 
-  // حقول الـ 360 الجديدة
   final String? front360Url;
   final String? back360Url;
   final String? side360Url;
@@ -28,7 +27,6 @@ class PropertyModel {
   final String? bedroom360Url;
   final String? bathroom360Url;
 
-  // حقول الـ Agent الجديدة
   final String? agentName;
   final String? agentPhone;
   final String? agentImage;

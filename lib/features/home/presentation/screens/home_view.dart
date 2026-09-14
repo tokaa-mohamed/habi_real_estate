@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
 import 'package:real_estate/features/home/presentation/widgets/category-list.dart';
+import 'package:real_estate/features/home/presentation/widgets/custom_nav_bar.dart';
 import 'package:real_estate/features/home/presentation/widgets/property_card.dart';
 import '../../../../core/di.dart'; 
 import '../cubit/home_cubit.dart';
@@ -11,8 +12,15 @@ import '../widgets/home_header.dart';
 import '../widgets/home_search_bar.dart';
 
 @RoutePage() 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                               return PropertyCard(
                                 property: state.bestOffers[index],
                                 isLandscape: true, 
-                                                              );
+                              );
                             },
                           ),
                         );
@@ -92,14 +100,14 @@ class HomeScreen extends StatelessWidget {
                         }
                         return ListView.separated(
                           shrinkWrap: true, 
-                                                    physics: const NeverScrollableScrollPhysics(), 
-                                                      itemCount: state.nearestProperties.length,
+                          physics: const NeverScrollableScrollPhysics(), 
+                          itemCount: state.nearestProperties.length,
                           separatorBuilder: (context, index) => const SizedBox(height: 12),
                           itemBuilder: (context, index) {
                             return PropertyCard(
                               property: state.nearestProperties[index],
                               isLandscape: false, 
-                                                          );
+                            );
                           },
                         );
                       }
@@ -110,6 +118,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
       ),
     );
