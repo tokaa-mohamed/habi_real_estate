@@ -32,30 +32,52 @@ class CustomBottomNavBar extends StatelessWidget {
           currentIndex: currentIndex,
           onTap: onTap,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.transparent, 
-                    elevation: 0, 
-                              selectedItemColor: AppColors.primaryColor,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          selectedItemColor: AppColors.primaryColor,
           unselectedItemColor: Colors.black.withOpacity(0.4),
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 12,
+          ),
           items: [
-             BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/home-icon.svg', width: 24, height: 24),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/home-icon.svg',
+                width: 24,
+                height: 24,
+              ),
               activeIcon: Icon(Icons.home),
               label: 'Home',
             ),
-             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/favourite.svg', width: 24, height: 24),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/favourite.svg',
+                width: 24,
+                height: 24,
+              ),
               activeIcon: Icon(Icons.favorite),
               label: 'Favorite',
             ),
-             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/chat-icon.svg', width: 24, height: 24),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/chat-icon.svg',
+                width: 24,
+                height: 24,
+              ),
               activeIcon: Icon(Icons.map),
               label: 'Map',
             ),
-             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/history-icon.svg', width: 24, height: 24),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/history-icon.svg',
+                width: 24,
+                height: 24,
+              ),
               activeIcon: Icon(Icons.history),
               label: 'History',
             ),

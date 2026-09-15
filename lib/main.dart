@@ -23,22 +23,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
+    final appRouter = AppRouter();
     return ScreenUtilInit(
       designSize: const Size(
         375,
         812,
       ), // Standard Figma mobile design canvas size
       minTextAdapt: true,
-     
-           
+
       splitScreenMode: true,
       builder: (context, child) {
-
-        return MaterialApp.router (
+        return MaterialApp.router(
           title: AppTexts.appName,
           debugShowCheckedModeBanner: false,
-          routerConfig: _appRouter.config(),
+          routerConfig: appRouter.config(),
           theme: ThemeData(
             useMaterial3: true,
             scaffoldBackgroundColor: AppColors.scaffoldBackground,
