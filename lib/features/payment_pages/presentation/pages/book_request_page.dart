@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate/core/constant/custom_app_bar.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
+import 'package:real_estate/features/payment_pages/presentation/pages/booking_details_page.dart';
 
 import 'package:real_estate/features/payment_pages/presentation/widgets/booking_details_widget.dart';
 import 'package:real_estate/features/payment_pages/presentation/widgets/price_details_widget.dart';
 
 import 'package:real_estate/features/payment_pages/presentation/widgets/property_widget.dart';
-import 'package:real_estate/features/payment_pages/presentation/widgets/text_title_style.dart';
 
 class BookRequestPage extends StatelessWidget {
   final int propertyId;
@@ -82,6 +82,21 @@ class BookRequestPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookingDetailsPage(
+                    propertyId: propertyId,
+                    propertyTitle: propertyTitle,
+                    propertyImageUrl: propertyImageUrl,
+                    propertyPrice: propertyPrice,
+                    propertyLocation: propertyLocation,
+                    rating: rating,
+                  ),
+                ),
+              );
+            },
             child: Container(
               width: 361.w,
               height: 40.h,
@@ -89,7 +104,7 @@ class BookRequestPage extends StatelessWidget {
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(12).r,
               ),
-              child: Text("Next: Review Data"),
+              child: Center(child: Text("Next: Review Data")),
             ),
           ),
         ],

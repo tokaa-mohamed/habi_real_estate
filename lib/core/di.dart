@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:real_estate/features/profile_page/data/datasource/profile_datasource.dart';
+import 'package:real_estate/features/profile_page/data/repositories/profile_data_repository_impl.dart';
+import 'package:real_estate/features/profile_page/domain/repository/profile_page_repository.dart';
 import 'package:real_estate/features/profile_page/domain/usecases/get_profile_data_usecase.dart';
 import 'package:real_estate/features/profile_page/domain/usecases/update_profile_data_usecase.dart';
 import 'package:real_estate/features/profile_page/presentation/cubit/profile_page_cubit.dart';
@@ -52,7 +55,25 @@ Future<void> initAppModule() async {
   getIt.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
   );
-  // Usecases
+  // 1. Profile Data Source
+  getIt.registerLazySingleton<ProfileDatasource>(
+    () => ProfileDatasource(supabase: getIt()),
+  );
+
+  // 2. Profile Repository
+  getIt.registerLazySingleton<ProfileDataRepository>(
+    () => ProfileDataRepositoryImpl(networkInfo: getIt(), datasource: getIt()),
+  );
+
+  // 3. Profile Use Cases
+  getIt.registerLazySingleton(
+    () => GetProfileDataUsecase(repository: getIt<ProfileDataRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => UpdateProfileUseCase(repository: getIt<ProfileDataRepository>()),
+  );
+
+  // 4. Profile Cubit
   getIt.registerFactory<ProfilePageCubit>(
     () => ProfilePageCubit(
       getProfileDataUsecase: getIt<GetProfileDataUsecase>(),
@@ -60,6 +81,10 @@ Future<void> initAppModule() async {
     ),
   );
 
+  // 2. Profile Repository
+  getIt.registerLazySingleton<ProfileDataRepository>(
+    () => ProfileDataRepositoryImpl(networkInfo: getIt(), datasource: getIt()),
+  );
   getIt.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(supabaseClient: getIt()),
   );

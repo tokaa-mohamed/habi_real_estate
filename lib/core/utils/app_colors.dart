@@ -5,14 +5,16 @@ class AppColors {
   static const Color primaryColor = Color(0xFF139FA8); // HabiSpace Teal
   static const Color primaryColorDarkAccent = Color(0xFF0E7A82);
   //new
-   static const Color lightPrimaryColor = Color(0xFFBFF8FF);
-   //new
-   static const Color lightGrey = Color(0xFFF8F8F8);
+  static const Color lightPrimaryColor = Color(0xFFBFF8FF);
+  //new
+  static const Color lightGrey = Color(0xFFF8F8F8);
 
-   
-  
-  static const Color secondaryColor = Color(0xFF1E1E1E); // Dark Slate / Apple Button
-  static const Color scaffoldBackground = Color(0xFFFAF9F6); // Soft off-white background
+  static const Color secondaryColor = Color(
+    0xFF1E1E1E,
+  ); // Dark Slate / Apple Button
+  static const Color scaffoldBackground = Color(
+    0xFFFAF9F6,
+  ); // Soft off-white background
 
   static const Color darkColor = Color(0xFF1A1A1A);
   static const Color lightGrayColor = Color(0xFFFAFAFA);
@@ -82,6 +84,8 @@ class AppColors {
   static const Color darkBorderColor = Color(0xFF404040);
   static const Color darkTextPrimaryColor = Color(0xFFFFFFFF);
   static const Color darkTextSecondaryColor = Color(0xFFB0B0B0);
+  static const Color lightGreen = Color(0xffF0FEE8);
+  static const Color darkGreen = Color(0xff336320);
 
   static const LinearGradient tealGradient = LinearGradient(
     colors: [primaryColor, primaryColorDarkAccent],
