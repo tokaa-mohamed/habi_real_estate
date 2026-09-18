@@ -5,9 +5,15 @@ import 'package:real_estate/core/constant/custom_app_bar.dart';
 import 'package:real_estate/core/di.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
+
 import 'package:real_estate/features/payment_pages/presentation/widgets/add_on_card.widget.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/card_input_widget.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/custom_button_widget.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/payment_method_bottom_sheet.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/payment_method_widget.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/price_details_widget.dart';
 import 'package:real_estate/features/payment_pages/presentation/widgets/property_widget.dart';
-import 'package:real_estate/features/payment_pages/presentation/widgets/text_of_user_details_widget.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/resident_data_wdget.dart';
 
 import 'package:real_estate/features/profile_page/presentation/cubit/profile_page_cubit.dart';
 
@@ -35,6 +41,9 @@ class BookingDetailsPage extends StatefulWidget {
 class _BookingDetailsPageState extends State<BookingDetailsPage> {
   late double _currentTotal;
   bool _isTrashMoneySelected = false;
+  // Payment Method State
+  String _selectedPaymentMethod = "Bank Transfer";
+  IconData _selectedPaymentIcon = Icons.account_balance;
 
   @override
   void initState() {
@@ -59,63 +68,7 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                 propertyLocation: widget.propertyLocation,
                 rating: widget.rating,
               ),
-              BlocBuilder<ProfilePageCubit, ProfilePageState>(
-                builder: (BuildContext context, ProfilePageState state) {
-                  if (state is ProfilePageLoadingState) {
-                    return CircularProgressIndicator();
-                  } else if (state is GetDataSuccessfulyState) {
-                    final user = state.dataOfUser;
-                    return Container(
-                      width: double.infinity,
-                      height: 240.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        border: Border(
-                          bottom: BorderSide(
-                            color: AppColors.black,
-                            width: 0.5,
-                          ),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Resident Details",
-                            style: getMediumStyle(
-                              fontSize: 12.sp,
-                              color: AppColors.black,
-                            ),
-                          ),
-                          SizedBox(height: 5.h),
-                          TextOfUserDetailsWidget(textuser: user.full_name),
-                          SizedBox(height: 5.h),
-                          TextOfUserDetailsWidget(textuser: user.email),
-                          SizedBox(height: 5.h),
-                          TextOfUserDetailsWidget(textuser: user.location),
-                          SizedBox(height: 5.h),
-                          Container(
-                            width: 371.w,
-                            height: 78.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.lightGreen,
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            child: Text(
-                              "Original identification card (KTP/KITAS) and Marriage Certificate (for couples) are required at check-in.",
-                              style: getRegularStyle(
-                                fontSize: 10.sp,
-                                color: AppColors.darkGreen,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return Text("There is an error here");
-                },
-              ),
+              ResidentDataWidget(),
               SizedBox(height: 5.h),
               AddOnCardWidget(
                 icon: Icons.delete,
@@ -137,18 +90,48 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                   });
                 },
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 361.w,
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(12).r,
-                  ),
-                  child: Center(child: Text("Next: Payment Details")),
+              SizedBox(height: 5.h),
+             Padding(
+                padding: EdgeInsets.all(16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PaymentMethodWidget(
+                      selectedMethod: _selectedPaymentMethod,
+                      icon: _selectedPaymentIcon,
+                      onTap: () {
+                        PaymentMethodBottomSheet.show(
+                          context: context,
+                          currentMethod: _selectedPaymentMethod,
+                          onMethodSelected: (String newTitle, IconData newIcon) {
+                            setState(() {
+                              _selectedPaymentMethod = newTitle;
+                              _selectedPaymentIcon = newIcon;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(height: 24.h),
+                     PriceDetailsWidgets(
+                propertyPrice: _currentTotal,
+
+              ),
+                    SizedBox(height: 24.h),
+                    
+                    // Passes the selected method to dynamically change the form
+                    CardInputWidget(selectedMethod: _selectedPaymentMethod),
+                    
+                    
+                  ],
                 ),
               ),
+              PriceDetailsWidgets(
+                propertyPrice: _currentTotal,
+
+              ),
+              
+              CustomButtonWidget(),
             ],
           ),
         ),

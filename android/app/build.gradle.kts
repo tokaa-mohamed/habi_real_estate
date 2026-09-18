@@ -6,12 +6,13 @@ plugins {
 
 android {
     namespace = "com.example.real_estate"
-    compileSdk = flutter.compileSdkVersion
+   compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
@@ -23,7 +24,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
     }
+    
 
     buildTypes {
         release {
@@ -32,6 +35,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+dependencies {
+    // استخدم الأقواس وعلامات التنصيص المزدوجة
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 }
 
 kotlin {

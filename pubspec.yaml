@@ -35,7 +35,7 @@ dependencies:
 
   # Supabase & Auth
   supabase_flutter: ^2.17.2
-  panorama: ^0.4.1
+  panorama_viewer: ^2.0.7
 
   # State Management & Architecture
   flutter_bloc: ^8.1.6
@@ -58,7 +58,7 @@ dependencies:
   # UI & Helper Packages
   flutter_screenutil: ^5.9.3
   conditional_builder_null_safety: ^0.0.6
-  fluttertoast: ^8.2.12
+  fluttertoast: ^10.0.0
   flutter_styled_toast: ^2.2.1
   pin_code_fields: ^8.0.1
   drop_down_list: ^0.0.8
