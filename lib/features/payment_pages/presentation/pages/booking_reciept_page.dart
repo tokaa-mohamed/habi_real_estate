@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate/core/constant/custom_app_bar.dart';
 import 'package:real_estate/core/di.dart';
+import 'package:real_estate/features/home/presentation/screens/home_view.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/custom_button_widget.dart';
 
 // Extracted Widgets
 import 'package:real_estate/features/payment_pages/presentation/widgets/receipt_header_widget.dart';
@@ -109,6 +111,15 @@ class BookingReceiptPage extends StatelessWidget {
               ),
 
               SizedBox(height: 40.h),
+              CustomButtonWidget(
+                title: "Done",
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+              ),
             ],
           ),
         ),
