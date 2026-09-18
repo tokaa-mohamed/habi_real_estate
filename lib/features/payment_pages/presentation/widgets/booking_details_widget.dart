@@ -23,8 +23,8 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(
-          top: BorderSide(color: AppColors.black, width: 0.5),
-          bottom: BorderSide(color: AppColors.black, width: 0.5),
+          top: BorderSide(color: AppColors.grey, width: 0.5),
+          bottom: BorderSide(color: AppColors.grey, width: 0.5),
         ),
       ),
       child: Column(
@@ -33,7 +33,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
             children: [
               Text(
                 "Booking Detail",
-                style: getMediumStyle(fontSize: 12.sp, color: AppColors.black),
+                style: getMediumStyle(fontSize: 15.sp, color: AppColors.black),
               ),
             ],
           ),

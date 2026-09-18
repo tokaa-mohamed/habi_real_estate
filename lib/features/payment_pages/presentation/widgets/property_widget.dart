@@ -25,7 +25,7 @@ class PropertyWidget extends StatelessWidget {
       height: 116.h,
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(top: BorderSide(color: AppColors.black, width: 0.5)),
+        border: Border(top: BorderSide(color: AppColors.grey, width: 0.5)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -64,20 +64,21 @@ class PropertyWidget extends StatelessWidget {
             children: [
               Text(
                 propertyTitle,
-                style: getMediumStyle(fontSize: 12.sp, color: AppColors.black),
+                style: getMediumStyle(fontSize: 15.sp, color: AppColors.black),
               ),
               SizedBox(height: 10.h),
               Text(
                 propertyLocation,
-                style: getRegularStyle(fontSize: 8.sp, color: AppColors.grey),
+                style: getRegularStyle(fontSize: 10.sp, color: AppColors.grey),
               ),
+              SizedBox(height: 10.h),
               Row(
                 children: [
                   Icon(Icons.star_border, color: AppColors.black),
                   Text(
                     "$rating",
                     style: getSmallStyle(
-                      fontSize: 8.sp,
+                      fontSize: 10.sp,
                       color: AppColors.black,
                     ),
                   ),

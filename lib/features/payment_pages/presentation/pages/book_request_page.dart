@@ -49,29 +49,29 @@ class BookRequestPage extends StatelessWidget {
                 PriceDetailsWidgets(propertyPrice: propertyPrice),
                 Container(
                   width: double.infinity,
-                  height: 180.h,
+                  height: 160.h,
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     border: Border(
-                      bottom: BorderSide(color: AppColors.black, width: 0.5),
+                      bottom: BorderSide(color: AppColors.grey, width: 0.5),
                     ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 5.h),
+                      SizedBox(height: 8.h),
                       Text(
                         "Cancellation Policy",
                         style: getMediumStyle(
-                          fontSize: 12,
+                          fontSize: 15,
                           color: AppColors.black,
                         ),
                       ),
-                      SizedBox(height: 5.h),
+                      SizedBox(height: 8.h),
                       Text(
                         "Free cancellation within 48 hours. If canceled before June 1, you will receive a partial refund. Read the Full Accommodation Policy for more details.",
                         style: getRegularStyle(
-                          fontSize: 12,
+                          fontSize: 15,
                           color: AppColors.grey,
                         ),
                       ),

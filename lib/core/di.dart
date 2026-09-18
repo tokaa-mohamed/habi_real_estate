@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:real_estate/features/payment_pages/data/datasource/booking_datasource.dart';
+import 'package:real_estate/features/payment_pages/data/repository/booking_repository_impl.dart';
+import 'package:real_estate/features/payment_pages/domain/repository/booking_repository.dart';
+import 'package:real_estate/features/payment_pages/domain/usecases/creating_booking_usecase.dart';
+import 'package:real_estate/features/payment_pages/presentation/cubit/booking_page_cubit.dart';
 import 'package:real_estate/features/profile_page/data/datasource/profile_datasource.dart';
 import 'package:real_estate/features/profile_page/data/repositories/profile_data_repository_impl.dart';
 import 'package:real_estate/features/profile_page/domain/repository/profile_page_repository.dart';
@@ -80,13 +85,24 @@ Future<void> initAppModule() async {
       updateProfileUseCase: getIt<UpdateProfileUseCase>(),
     ),
   );
-
-  // 2. Profile Repository
-  getIt.registerLazySingleton<ProfileDataRepository>(
-    () => ProfileDataRepositoryImpl(networkInfo: getIt(), datasource: getIt()),
+  // Data sources of booking page
+  getIt.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(supabaseClient: getIt()),
   );
+
+  // Repository of booking page
+  getIt.registerLazySingleton<BookingRepository>(
+    () => BookingRepositoryImpl(remoteDataSource: getIt()),
+  );
+
+  // Use cases of booking page
+  getIt.registerLazySingleton(() => CreateBookingUseCase(getIt()));
   getIt.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(supabaseClient: getIt()),
+  );
+  // Cubits of booking page
+  getIt.registerFactory<BookingCubit>(
+    () => BookingCubit(createBookingUseCase: getIt()),
   );
 
   // 3. Repositories

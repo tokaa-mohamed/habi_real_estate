@@ -13,7 +13,7 @@ class TextTitleWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: getRegularStyle(fontSize: 10.sp, color: AppColors.black),
+          style: getRegularStyle(fontSize: 15.sp, color: AppColors.black),
         ),
       ],
     );

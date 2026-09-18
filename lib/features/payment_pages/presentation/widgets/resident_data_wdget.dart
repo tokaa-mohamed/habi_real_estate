@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
@@ -14,14 +13,18 @@ class ResidentDataWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfilePageCubit, ProfilePageState>(
       builder: (BuildContext context, ProfilePageState state) {
-        if (state is ProfilePageLoadingState) {
-          return CircularProgressIndicator();
-        } else if (state is GetDataSuccessfulyState) {
+        // 1. Group Initial and Loading states together to show the spinner
+        if (state is ProfilePageIntialState ||
+            state is ProfilePageLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        // 2. Handle the Success state
+        else if (state is GetDataSuccessfulyState) {
           final user = state.dataOfUser;
           return Container(
             width: double.infinity,
             height: 240.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.white,
               border: Border(
                 bottom: BorderSide(color: AppColors.black, width: 0.5),
@@ -63,7 +66,17 @@ class ResidentDataWidget extends StatelessWidget {
             ),
           );
         }
-        return Text("There is an error here");
+        // 3. Catch the Error state so you can see exactly why it failed
+        // (Note: Replace 'ProfilePageErrorState' with whatever you named your failure state)
+        else if (state is FailGetDataState) {
+          return Text(
+            "Data Fetch Failed: ${state.errorMessege}",
+            style: const TextStyle(color: Colors.red),
+          );
+        }
+
+        // 4. Fallback for completely unknown states
+        return Text("Unknown state: ${state.runtimeType}");
       },
     );
   }

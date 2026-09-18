@@ -3,35 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
 
 class CardInputWidget extends StatelessWidget {
-  final String selectedMethod; // Add this variable
+  final String selectedMethod;
 
   const CardInputWidget({super.key, required this.selectedMethod});
 
   @override
   Widget build(BuildContext context) {
-    // If they select Credit Card, show the full form
     if (selectedMethod == "Credit Card") {
       return _buildCreditCardForm();
-    }
-    // If they select Bank Transfer, show bank instructions
-    else if (selectedMethod == "Bank Transfer") {
-      return _buildPlaceholderMessage(
-        title: "Bank Transfer Details",
-        message:
-            "You will receive a Virtual Account number to complete your transfer on the next screen.",
-      );
-    }
-    // Default fallback for E-Wallet / Mobile Banking
-    else {
-      return _buildPlaceholderMessage(
-        title: "$selectedMethod Details",
-        message:
-            "You will be redirected to your $selectedMethod app to authorize this payment.",
-      );
+    } else if (selectedMethod == "Bank Transfer") {
+      return _buildBankTransferForm();
+    } else {
+      // Handles E-Wallet and Mobile Banking
+      return _buildWalletForm();
     }
   }
 
-  // --- The Original Credit Card Form ---
+  // --- 1. Credit Card Form ---
   Widget _buildCreditCardForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,40 +70,59 @@ class CardInputWidget extends StatelessWidget {
     );
   }
 
-  // --- Placeholder for other payment methods ---
-  Widget _buildPlaceholderMessage({
-    required String title,
-    required String message,
-  }) {
+  // --- 2. Bank Transfer Form ---
+  Widget _buildBankTransferForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          "Bank Transfer Details",
           style: getBoldStyle(fontSize: 16.sp, color: Colors.black),
         ),
         SizedBox(height: 8.h),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(16.w),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade50,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(color: Colors.grey.shade300),
-          ),
-          child: Text(
-            message,
-            style: getRegularStyle(
-              fontSize: 14.sp,
-              color: Colors.grey.shade700,
-            ),
-          ),
+        Text(
+          "Please enter the bank account number you will transfer from.",
+          style: getRegularStyle(fontSize: 12.sp, color: Colors.grey.shade500),
         ),
+        SizedBox(height: 24.h),
+
+        Text(
+          "Account Number",
+          style: getBoldStyle(fontSize: 14.sp, color: Colors.black),
+        ),
+        SizedBox(height: 8.h),
+        _buildTextField(hint: "Enter your 10-14 digit account number"),
       ],
     );
   }
 
-  // Reusable text field builder
+  // --- 3. E-Wallet / Mobile Banking Form ---
+  Widget _buildWalletForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$selectedMethod Details",
+          style: getBoldStyle(fontSize: 16.sp, color: Colors.black),
+        ),
+        SizedBox(height: 8.h),
+        Text(
+          "Please enter the mobile number linked to your $selectedMethod.",
+          style: getRegularStyle(fontSize: 12.sp, color: Colors.grey.shade500),
+        ),
+        SizedBox(height: 24.h),
+
+        Text(
+          "Mobile Number",
+          style: getBoldStyle(fontSize: 14.sp, color: Colors.black),
+        ),
+        SizedBox(height: 8.h),
+        _buildTextField(hint: "e.g. 010 1234 5678"),
+      ],
+    );
+  }
+
+  // --- Reusable text field builder ---
   Widget _buildTextField({required String hint, String? suffixText}) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
@@ -129,7 +136,10 @@ class CardInputWidget extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
-          hintStyle: getRegularStyle(fontSize: 14.sp, color: Colors.black),
+          hintStyle: getRegularStyle(
+            fontSize: 14.sp,
+            color: Colors.grey.shade400,
+          ),
           suffixIcon: suffixText != null
               ? Padding(
                   padding: EdgeInsets.all(8.w),
