@@ -11,23 +11,32 @@ import 'package:real_estate/features/home/presentation/cubit/home_cubit.dart';
 import 'package:real_estate/features/home/presentation/cubit/property_details_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'constant/app_constants.dart';
+import 'routes/app_router.dart';
 import 'save data/save_data.dart';
 import 'security/security_helper.dart';
 import 'api/dio_helper.dart';
 import 'api/internet_connection_checker.dart';
+import '../features/auth/data/datasources/auth_remote_data_source.dart';
+import '../features/auth/data/repositories/auth_repository_impl.dart';
+import '../features/auth/domain/repositories/auth_repository.dart';
+import '../features/auth/domain/usecases/get_current_user_usecase.dart';
+import '../features/auth/domain/usecases/login_usecase.dart';
+import '../features/auth/domain/usecases/logout_usecase.dart';
+import '../features/auth/domain/usecases/reset_password_usecase.dart';
+import '../features/auth/domain/usecases/signup_usecase.dart';
+import '../features/auth/presentation/cubit/auth_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
-
 Future<void> initAppModule() async {
-  // 1. Initialize Supabase SDK
+  getIt.registerSingleton<AppRouter>(AppRouter());
+
   await Supabase.initialize(
     url: AppConstants.supabaseUrl,
     publishableKey: AppConstants.supabaseAnonKey,
   );
   getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
 
-  // 2. Cache & Security Helpers
   final cacheHelper = CacheHelper();
   await cacheHelper.init();
   getIt.registerLazySingleton<CacheHelper>(() => cacheHelper);
@@ -49,6 +58,33 @@ Future<void> initAppModule() async {
 
   getIt.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
+  );
+
+  getIt.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+  );
+
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(
+      remoteDataSource: getIt<AuthRemoteDataSource>(),
+      networkInfo: getIt<NetworkInfo>(),
+    ),
+  );
+
+  getIt.registerLazySingleton(() => LoginUseCase(getIt<AuthRepository>()));
+  getIt.registerLazySingleton(() => SignUpUseCase(getIt<AuthRepository>()));
+  getIt.registerLazySingleton(() => LogoutUseCase(getIt<AuthRepository>()));
+  getIt.registerLazySingleton(() => GetCurrentUserUseCase(getIt<AuthRepository>()));
+  getIt.registerLazySingleton(() => ResetPasswordUseCase(getIt<AuthRepository>()));
+
+  getIt.registerFactory(
+    () => AuthCubit(
+      loginUseCase: getIt<LoginUseCase>(),
+      signUpUseCase: getIt<SignUpUseCase>(),
+      logoutUseCase: getIt<LogoutUseCase>(),
+      getCurrentUserUseCase: getIt<GetCurrentUserUseCase>(),
+      resetPasswordUseCase: getIt<ResetPasswordUseCase>(),
+    ),
   );
 
 

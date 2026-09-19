@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
@@ -41,7 +40,7 @@ class PropertyHeaderWidget extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     child: IconButton(
                       icon: SvgPicture.asset('assets/icons/arrow-left.svg', width: 24, height: 24),
-                      onPressed: () => context.router.pop(),
+                    onPressed: () => Navigator.pop(context),
                     ),
                   ),
                 ),
@@ -60,7 +59,7 @@ class PropertyHeaderWidget extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   child: IconButton(
                     icon: SvgPicture.asset('assets/icons/arrow-right.svg', width: 24, height: 24),
-                    onPressed: () => context.router.pop(),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
             ),

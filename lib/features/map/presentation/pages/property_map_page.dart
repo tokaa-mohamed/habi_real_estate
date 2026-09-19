@@ -9,7 +9,7 @@ import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 import '../widgets/property_map_widget.dart';
 
-//@RoutePage()
+@RoutePage()
 class PropertyMapPage extends StatelessWidget {
   final PropertyLocationEntity? initialProperty;
   final double? initialLat;
