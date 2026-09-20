@@ -13,8 +13,8 @@ class PropertyDetailsRepositoryImpl implements PropertyDetailsRepository {
   Future<PropertyEntity> getPropertyDetails(int propertyId) async {
     final response = await supabaseClient
         .from('properties')
-        .select('*, reviews(*)') // شلنا property_360_views خالص من هنا
-        .eq('id', propertyId)
+        .select('*, reviews(*)') 
+                .eq('id', propertyId)
         .single();
 
     final model = PropertyModel.fromJson(response);
@@ -35,7 +35,7 @@ class PropertyDetailsRepositoryImpl implements PropertyDetailsRepository {
       garages: model.garages,
       livingRooms: model.livingRooms,
       rating: model.rating.toDouble(),
-      mediaUrl: model.mainImageUrl,
+      mediaUrl: model.mediaUrl,
       reviewsCount: model.reviewsCount,
       imagesGallery: model.imagesGallery,
       
@@ -66,7 +66,6 @@ Future<List<PropertyEntity>> getSuggestedProperties({
       .neq('location', currentLocation)
       .limit(10);
 
-  // 1. بنحول الـ JSON لـ PropertyModel
   final models = (response as List)
       .map((json) => PropertyModel.fromJson(json))
       .toList();
@@ -87,7 +86,7 @@ Future<List<PropertyEntity>> getSuggestedProperties({
     garages: model.garages,
     livingRooms: model.livingRooms,
     rating: model.rating.toDouble(),
-    mediaUrl: model.mainImageUrl,
+    mediaUrl: model.mediaUrl,
     reviewsCount: model.reviewsCount,
     imagesGallery: model.imagesGallery,
   )).toList();

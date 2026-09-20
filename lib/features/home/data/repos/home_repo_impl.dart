@@ -30,7 +30,7 @@ class HomeRepositoryImpl implements HomeRepository {
         garages: model.garages,
         livingRooms: model.livingRooms,
         rating: (model.rating).toDouble(),
-        mediaUrl: model.mainImageUrl,
+        mediaUrl: model.mediaUrl,
                 reviewsCount: model.reviewsCount,
         imagesGallery: model.imagesGallery,
       )).toList();

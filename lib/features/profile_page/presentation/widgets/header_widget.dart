@@ -6,6 +6,7 @@ class HeaderWidget extends StatelessWidget {
   final String name;
   final String location;
   final String avatarUrl;
+
   const HeaderWidget({
     super.key,
     required this.name,
@@ -15,58 +16,89 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 180.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15).r,
-              topRight: Radius.circular(15).r,
+    return SizedBox(
+      height: 270.h, 
+            child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: 160.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.teal.shade700, 
+                            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24.r),
+                bottomRight: Radius.circular(24.r),
+              ),
             ),
           ),
-          child: Image.asset("", fit: BoxFit.contain),
-        ),
-        Container(
-          decoration: BoxDecoration(shape: BoxShape.circle),
-          child: Positioned(
-            top: 130.h,
-            left: 30.w,
-            child: CircleAvatar(
-              radius: 50.r,
-              backgroundImage: NetworkImage("$avatarUrl"),
+
+          Positioned(
+            top: 100.h,
+                        left: 24.w,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 4.w), 
+                
+              ),
+              child: CircleAvatar(
+                radius: 45.r,
+                backgroundColor: Colors.grey.shade300,
+                backgroundImage: avatarUrl.isNotEmpty
+                    ? NetworkImage(avatarUrl) as ImageProvider
+                    : const AssetImage('assets/images/default_avatar.png'), 
+                    
+                onBackgroundImageError: (exception, stackTrace) {
+                },
+              ),
             ),
           ),
-        ),
-        Positioned(
-          top: 195.h,
-          right: 24.w,
-          child: IconButton(
-            onPressed: () {
-              // Navigate to edit profile or trigger edit mode
-            },
-            icon: Icon(Icons.edit_outlined, color: Colors.teal, size: 28.sp),
+
+          // 3. زرار التعديل (Edit Icon)
+          Positioned(
+            top: 175.h,
+            right: 24.w,
+            child: IconButton(
+              onPressed: () {
+              },
+              icon: Icon(Icons.edit_outlined, color: Colors.teal, size: 26.sp),
+            ),
           ),
-        ),
-        Positioned(
-          top: 160.h,
-          left: 30.w,
-          child: Text(
-            name,
-            style: getMediumStyle(fontSize: 20.sp, color: Colors.black),
+
+          Positioned(
+            top: 175.h,
+            left: 135.w, 
+                        right: 70.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: getMediumStyle(fontSize: 18.sp, color: Colors.black),
+                ),
+                SizedBox(height: 4.h),
+                Row(
+                  children: [
+                    Icon(Icons.location_on_outlined, size: 14.sp, color: Colors.grey),
+                    SizedBox(width: 4.w),
+                    Expanded(
+                      child: Text(
+                        location,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: getRegularStyle(fontSize: 14.sp, color: Colors.grey.shade600),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: 10.h),
-        Positioned(
-          top: 180.h,
-          left: 30.w,
-          child: Text(
-            location,
-            style: getRegularStyle(fontSize: 20.sp, color: Colors.black),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

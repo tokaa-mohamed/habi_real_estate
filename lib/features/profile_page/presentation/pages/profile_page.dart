@@ -14,23 +14,26 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProfilePageCubit>(
-      create: (context) => getIt<ProfilePageCubit>()..getDataOfUser(), 
+      create: (context) => getIt<ProfilePageCubit>()..getDataOfUser(),
       child: Scaffold(
-        backgroundColor: Colors.grey.shade100, 
-                body: BlocConsumer<ProfilePageCubit, ProfilePageState>(
+        backgroundColor: Colors.grey.shade100,
+        body: BlocConsumer<ProfilePageCubit, ProfilePageState>(
           listener: (BuildContext context, state) {
             if (state is FailGetDataState) {
               // CustomToast.showWarning(state.errorMessege);
             }
           },
           builder: (BuildContext context, state) {
-            if (state is ProfilePageLoadingState) {
+            if (state is ProfilePageLoadingState || state is ProfilePageIntialState) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is GetDataSuccessfulyState) {
-              final userData = state.dataOfUser;
-              String name = userData.full_name;
-              String location = userData.location;
-              String avatarUrl = userData.avatar_url;
+            } else if (state is GetDataSuccessfulyState || state is ProfilePageUpdateState) {
+              final userData = state is GetDataSuccessfulyState 
+                  ? state.dataOfUser 
+                  : (state as ProfilePageUpdateState).updatesDataOfUser;
+
+              String name = userData.full_name ?? 'User Name';
+              String location = userData.location ?? 'Location not specified';
+              String avatarUrl = userData.avatar_url ?? '';
 
               return CustomScrollView(
                 slivers: [
@@ -96,8 +99,15 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               );
+            } else if (state is FailGetDataState) {
+              return Center(
+                child: Text(
+                  state.errorMessege,
+                  style: TextStyle(color: Colors.red, fontSize: 14.sp),
+                ),
+              );
             }
-            return const Center(child: CircularProgressIndicator());
+            return const SizedBox.shrink();
           },
         ),
       ),

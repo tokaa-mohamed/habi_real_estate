@@ -15,19 +15,25 @@ class ProfileDataModel extends DataOfProfileEntity {
   });
 
   factory ProfileDataModel.fromJson(Map<String, dynamic> json) {
-    final id = json["id"];
-    final updated_at = json["updated_at"];
     return ProfileDataModel(
-      full_name: json["full_name"],
-      email: json["email"],
-      location: json["location"],
-      avatar_url: json["avatar_url"],
-      created_at: DateTime.parse(json["created_at"]),
-      id: id,
-      updated_at: DateTime.parse(updated_at),
+      full_name: json["full_name"]?.toString() ?? '',
+      email: json["email"]?.toString() ?? '',
+      location: json["location"]?.toString() ?? 'Not specified',
+      avatar_url: json["avatar_url"]?.toString() ?? '',
+      
+      created_at: json["created_at"] != null 
+          ? DateTime.parse(json["created_at"]) 
+          : DateTime.now(),
+          
+      id: json["id"]?.toString() ?? '',
+      
+      updated_at: json["updated_at"] != null 
+          ? DateTime.parse(json["updated_at"]) 
+          : DateTime.now(),
     );
   }
-  toJson() {
+
+  Map<String, dynamic> toJson() {
     return {
       "full_name": full_name,
       "email": email,

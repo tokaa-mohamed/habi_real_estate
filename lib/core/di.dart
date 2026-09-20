@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:real_estate/features/favs/data/datasources/datasource_fav.dart';
@@ -52,6 +53,19 @@ import '../features/auth/presentation/cubit/auth_cubit.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> initAppModule() async {
+
+if (kIsWeb) {
+  getIt.registerLazySingleton<NetworkInfo>(() => WebNetworkInfo());
+} else {
+  getIt.registerLazySingleton<InternetConnectionChecker>(
+    () => InternetConnectionChecker.createInstance(),
+  );
+
+  getIt.registerLazySingleton<NetworkInfo>(
+    () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
+  );
+}
+
   getIt.registerSingleton<AppRouter>(AppRouter());
 
   await Supabase.initialize(
@@ -74,14 +88,6 @@ Future<void> initAppModule() async {
 
   await DioHelper.init();
   getIt.registerLazySingleton<DioHelper>(() => DioHelper());
-
-  getIt.registerLazySingleton<InternetConnectionChecker>(
-    () => InternetConnectionChecker.createInstance(),
-  );
-
-  getIt.registerLazySingleton<NetworkInfo>(
-    () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
-  );
 
   // 1. Auth Module
   getIt.registerLazySingleton<AuthRemoteDataSource>(
@@ -211,10 +217,9 @@ getIt.registerLazySingleton(() => GetFavoritesUseCase(getIt<FavoritesRepository>
 getIt.registerLazySingleton(() => AddToFavoritesUseCase(getIt<FavoritesRepository>()));
 getIt.registerLazySingleton(() => RemoveFromFavoritesUseCase(getIt<FavoritesRepository>()));
 
-getIt.registerFactory(() => FavoritesCubit(
+getIt.registerLazySingleton(() => FavoritesCubit(
   getIt<GetFavoritesUseCase>(),
   getIt<AddToFavoritesUseCase>(),
- // getIt<RemoveFromFavoritesUseCase>(),
+  getIt<RemoveFromFavoritesUseCase>(),
 ));
-
 }

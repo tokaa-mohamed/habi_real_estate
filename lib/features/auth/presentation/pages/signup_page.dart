@@ -85,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   true,
                 ).show(context);
               } else if (state is AuthAuthenticated) {
-                context.router.replace(const HomeRoute());
+                context.router.replace(const LoginRoute());
 
 
                 // CustomSnackbar(

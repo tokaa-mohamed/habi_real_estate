@@ -1,76 +1,78 @@
-class PropertyModel {
-  final int id;
-  final String title;
-  final String? description;
-  final num price;
-  final String priceUnit;
-  final String location;
-  final int distanceMiles;
-  final String category;
-  final String status;
-  final int bedrooms;
-  final int bathrooms;
-  final int kitchens;
-  final int garages;
-  final int livingRooms;
-  final String mainImageUrl; 
-  final int? sqft;
-  final num rating;
-  final int reviewsCount;
-  final List<String> imagesGallery; 
+import 'package:real_estate/features/home/domain/entitties/property_entity.dart'; // عدلي المسار حسب مشروعك
 
-  final String? front360Url;
-  final String? back360Url;
-  final String? side360Url;
-  final String? livingRoom360Url;
-  final String? kitchen360Url;
-  final String? bedroom360Url;
-  final String? bathroom360Url;
-
-  final String? agentName;
-  final String? agentPhone;
-  final String? agentImage;
-  final String? agentRole;
-
-  PropertyModel({
-    required this.id,
-    required this.title,
-    this.description,
-    required this.price,
-    required this.priceUnit,
-    required this.location,
-    required this.distanceMiles,
-    required this.category,
-    required this.status,
-    required this.bedrooms,
-    required this.bathrooms,
-    required this.kitchens,
-    required this.garages,
-    required this.livingRooms,
-    required this.mainImageUrl,
-    this.sqft,
-    required this.rating,
-    required this.reviewsCount,
-    required this.imagesGallery,
-    this.front360Url,
-    this.back360Url,
-    this.side360Url,
-    this.livingRoom360Url,
-    this.kitchen360Url,
-    this.bedroom360Url,
-    this.bathroom360Url,
-    this.agentName,
-    this.agentPhone,
-    this.agentImage,
-    this.agentRole,
-  });
+class PropertyModel extends PropertyEntity {
+  const PropertyModel({
+    required int id,
+    required String title,
+    required String description,
+    required double price,
+    required String priceUnit,
+    required String location,
+    required int distanceMiles,
+    required String category,
+    required String status,
+    required int bedrooms,
+    required int bathrooms,
+    required int kitchens,
+    required int garages,
+    required int livingRooms,
+    required double rating,
+    required String mediaUrl,
+    required int reviewsCount,
+    required List<String> imagesGallery,
+    String? front360Url,
+    String? back360Url,
+    String? side360Url,
+    String? livingRoom360Url,
+    String? kitchen360Url,
+    String? bedroom360Url,
+    String? bathroom360Url,
+    double? latitude,
+    double? longitude,
+    String? agentName,
+    String? agentPhone,
+    String? agentImage,
+    String? agentRole,
+  }) : super(
+          id: id,
+          title: title,
+          description: description,
+          price: price,
+          priceUnit: priceUnit,
+          location: location,
+          distanceMiles: distanceMiles,
+          category: category,
+          status: status,
+          bedrooms: bedrooms,
+          bathrooms: bathrooms,
+          kitchens: kitchens,
+          garages: garages,
+          livingRooms: livingRooms,
+          rating: rating,
+          mediaUrl: mediaUrl,
+          reviewsCount: reviewsCount,
+          imagesGallery: imagesGallery,
+          front360Url: front360Url,
+          back360Url: back360Url,
+          side360Url: side360Url,
+          livingRoom360Url: livingRoom360Url,
+          kitchen360Url: kitchen360Url,
+          bedroom360Url: bedroom360Url,
+          bathroom360Url: bathroom360Url,
+          latitude: latitude,
+          longitude: longitude,
+          agentName: agentName,
+          agentPhone: agentPhone,
+          agentImage: agentImage,
+          agentRole: agentRole,
+        );
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
     return PropertyModel(
       id: json['id'],
       title: json['title'] ?? '',
-      description: json['description'],
-      price: json['price'] ?? 0,
+      description: json['description'] ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
       priceUnit: json['price_unit'] ?? '',
       location: json['location'] ?? '',
       distanceMiles: json['distance_miles'] ?? 0,
@@ -81,9 +83,8 @@ class PropertyModel {
       kitchens: json['kitchens'] ?? 0,
       garages: json['garages'] ?? 0,
       livingRooms: json['living_rooms'] ?? 0,
-      mainImageUrl: json['main_image_url'] ?? '',
-      sqft: json['sqft'],
-      rating: json['rating'] ?? 0,
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+      mediaUrl: json['main_image_url'] ?? '',
       reviewsCount: json['reviews_count'] ?? 0,
       imagesGallery: List<String>.from(json['images_gallery'] ?? []),
       
@@ -95,10 +96,50 @@ class PropertyModel {
       bedroom360Url: json['bedroom_image_url'] ?? json['main_image_url'],
       bathroom360Url: json['outdoor_image_url'] ?? json['main_image_url'],
       
+      latitude: (json['lat'] as num?)?.toDouble(),
+      longitude: (json['long'] as num?)?.toDouble(),
+      
       agentName: json['agent_name'],
       agentPhone: json['agent_phone'],
       agentImage: json['agent_image'],
       agentRole: json['agent_role'],
+    );
+  }
+
+  factory PropertyModel.fromEntity(PropertyEntity entity) {
+    if (entity is PropertyModel) return entity;
+    return PropertyModel(
+      id: entity.id,
+      title: entity.title,
+      description: entity.description,
+      price: entity.price,
+      priceUnit: entity.priceUnit,
+      location: entity.location,
+      distanceMiles: entity.distanceMiles,
+      category: entity.category,
+      status: entity.status,
+      bedrooms: entity.bedrooms,
+      bathrooms: entity.bathrooms,
+      kitchens: entity.kitchens,
+      garages: entity.garages,
+      livingRooms: entity.livingRooms,
+      rating: entity.rating,
+      mediaUrl: entity.mediaUrl,
+      reviewsCount: entity.reviewsCount,
+      imagesGallery: entity.imagesGallery,
+      front360Url: entity.front360Url,
+      back360Url: entity.back360Url,
+      side360Url: entity.side360Url,
+      livingRoom360Url: entity.livingRoom360Url,
+      kitchen360Url: entity.kitchen360Url,
+      bedroom360Url: entity.bedroom360Url,
+      bathroom360Url: entity.bathroom360Url,
+      latitude: entity.latitude,
+      longitude: entity.longitude,
+      agentName: entity.agentName,
+      agentPhone: entity.agentPhone,
+      agentImage: entity.agentImage,
+      agentRole: entity.agentRole,
     );
   }
 }

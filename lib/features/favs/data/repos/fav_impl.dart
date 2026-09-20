@@ -2,27 +2,24 @@ import 'package:dartz/dartz.dart';
 import 'package:real_estate/core/errors/failure.dart';
 import 'package:real_estate/features/favs/data/datasources/datasource_fav.dart';
 import 'package:real_estate/features/favs/domain/repos/fav_repo.dart';
-import 'package:real_estate/features/home/domain/entitties/property_entity.dart';
+import 'package:real_estate/features/home/data/models/property_model.dart'; 
+
 class FavoritesRepositoryImpl implements FavoritesRepository {
   final FavoritesRemoteDataSource remoteDataSource;
 
   FavoritesRepositoryImpl(this.remoteDataSource);
 
-@override
-Future<Either<Failure, List<PropertyEntity>>> getFavoriteProperties() async {
-  try {
-    final propertyModels = await remoteDataSource.getFavoriteProperties();
-    
-    final List<PropertyEntity> properties = propertyModels
-        .map((model) => model as PropertyEntity) 
+  @override
+  Future<Either<Failure, List<PropertyModel>>> getFavoriteProperties() async {
+    try {
+      final List<PropertyModel> propertyModels = await remoteDataSource.getFavoriteProperties();
       
-        .toList();
-    
-    return Right(properties);
-  } catch (e) {
-    return Left(ServerFailure(message: e.toString()));
+      return Right(propertyModels);
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
-}
+
   @override
   Future<Either<Failure, void>> addToFavorites(int propertyId) async {
     try {

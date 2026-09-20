@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
 import 'package:real_estate/core/di.dart';
+import 'package:real_estate/features/favs/presentation/cubit/fav_cubit.dart';
 import 'package:real_estate/features/home/presentation/cubit/property_details_state.dart';
 import 'package:real_estate/features/home/presentation/widgets/listing_agent.dart';
 import 'package:real_estate/features/home/presentation/widgets/property_action.dart';
@@ -25,8 +26,15 @@ class PropertyDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PropertyDetailsCubit>()..fetchPropertyDetails(propertyId),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<PropertyDetailsCubit>()..fetchPropertyDetails(propertyId),
+        ),
+        BlocProvider(
+         create: (context) => getIt<FavoritesCubit>()..fetchFavorites(), 
+                  ),
+      ],
       child: Scaffold(
         backgroundColor: AppColors.scaffoldBackground,
         body: BlocBuilder<PropertyDetailsCubit, PropertyDetailsState>(
@@ -41,16 +49,16 @@ class PropertyDetailsScreen extends StatelessWidget {
               final property = state.property;
               final reviews = state.reviews;
 
-final locationEntity = PropertyLocationEntity(
+              final locationEntity = PropertyLocationEntity(
                 id: property.id,
                 title: property.title,
                 location: property.location,
                 price: property.price,
                 mainImageUrl: property.mediaUrl,
-                latitude: property.latitude??30.0444, 
-                longitude: property.longitude??31.2357, 
-                
-                              );
+                latitude: property.latitude ?? 30.0444, 
+                longitude: property.longitude ?? 31.2357, 
+              );
+
               return Stack(
                 children: [
                   SingleChildScrollView(
@@ -70,9 +78,8 @@ final locationEntity = PropertyLocationEntity(
                               const SizedBox(height: 24),
                               PropertyDescriptionSection(property: property),
                               const SizedBox(height: 24),
-                               ListingAgentWidget(property: property,),
+                              ListingAgentWidget(property: property),
                               const SizedBox(height: 24),
-                              
                               SizedBox(
                                 height: 250,
                                 child: ClipRRect(
@@ -82,11 +89,10 @@ final locationEntity = PropertyLocationEntity(
                                     selectedProperty: locationEntity,
                                     showControls: true,
                                     showCard: false, 
-                                        initialZoom: 14.0,
+                                    initialZoom: 14.0,
                                   ),
                                 ),
                               ),
-
                               const SizedBox(height: 24),
                               PropertyReviewsSection(property: property, reviews: reviews),
                               const SizedBox(height: 20),
@@ -99,7 +105,6 @@ final locationEntity = PropertyLocationEntity(
                       ],
                     ),
                   ),
-
                   Positioned(
                     bottom: 0,
                     left: 0,
