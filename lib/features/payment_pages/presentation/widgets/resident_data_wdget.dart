@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:real_estate/core/utils/app_colors.dart';
+import 'package:real_estate/core/utils/app_styles.dart';
+import 'package:real_estate/features/payment_pages/presentation/widgets/text_of_user_details_widget.dart';
+import 'package:real_estate/features/profile_page/presentation/cubit/profile_page_cubit.dart';
+
+class ResidentDataWidget extends StatelessWidget {
+  const ResidentDataWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProfilePageCubit, ProfilePageState>(
+      builder: (BuildContext context, ProfilePageState state) {
+        // 1. Group Initial and Loading states together to show the spinner
+        if (state is ProfilePageIntialState ||
+            state is ProfilePageLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        // 2. Handle the Success state
+        else if (state is GetDataSuccessfulyState) {
+          final user = state.dataOfUser;
+          return Container(
+            width: double.infinity,
+            height: 240.h,
+            decoration: const BoxDecoration(
+              color: AppColors.white,
+              border: Border(
+                bottom: BorderSide(color: AppColors.black, width: 0.5),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Resident Details",
+                  style: getMediumStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.black,
+                  ),
+                ),
+                SizedBox(height: 5.h),
+                TextOfUserDetailsWidget(textuser: user.full_name),
+                SizedBox(height: 5.h),
+                TextOfUserDetailsWidget(textuser: user.email),
+                SizedBox(height: 5.h),
+                TextOfUserDetailsWidget(textuser: user.location),
+                SizedBox(height: 5.h),
+                Container(
+                  width: 371.w,
+                  height: 78.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGreen,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Text(
+                    "Original identification card (KTP/KITAS) and Marriage Certificate (for couples) are required at check-in.",
+                    style: getRegularStyle(
+                      fontSize: 10.sp,
+                      color: AppColors.darkGreen,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        // 3. Catch the Error state so you can see exactly why it failed
+        // (Note: Replace 'ProfilePageErrorState' with whatever you named your failure state)
+        else if (state is FailGetDataState) {
+          return Text(
+            "Data Fetch Failed: ${state.errorMessege}",
+            style: const TextStyle(color: Colors.red),
+          );
+        }
+
+        // 4. Fallback for completely unknown states
+        return Text("Unknown state: ${state.runtimeType}");
+      },
+    );
+  }
+}

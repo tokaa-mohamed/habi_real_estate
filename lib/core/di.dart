@@ -1,5 +1,28 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:real_estate/features/favs/data/datasources/datasource_fav.dart';
+import 'package:real_estate/features/favs/data/repos/fav_impl.dart';
+import 'package:real_estate/features/favs/domain/repos/fav_repo.dart';
+import 'package:real_estate/features/favs/domain/usecases/add_fav_usecase.dart';
+import 'package:real_estate/features/favs/domain/usecases/get_fav_usecase.dart';
+import 'package:real_estate/features/favs/domain/usecases/remove_usecase.dart';
+import 'package:real_estate/features/favs/presentation/cubit/fav_cubit.dart';
+import 'package:real_estate/features/map/data/datasources/map_remote_data_source.dart';
+import 'package:real_estate/features/map/data/repositories/map_repository_impl.dart';
+import 'package:real_estate/features/map/domain/repositories/map_repository.dart';
+import 'package:real_estate/features/map/domain/usecases/get_property_usecase.dart';
+import 'package:real_estate/features/map/presentation/cubit/map_cubit.dart';
+import 'package:real_estate/features/payment_pages/data/datasource/booking_datasource.dart';
+import 'package:real_estate/features/payment_pages/data/repository/booking_repository_impl.dart';
+import 'package:real_estate/features/payment_pages/domain/repository/booking_repository.dart';
+import 'package:real_estate/features/payment_pages/domain/usecases/creating_booking_usecase.dart';
+import 'package:real_estate/features/payment_pages/presentation/cubit/booking_page_cubit.dart';
+import 'package:real_estate/features/profile_page/data/datasource/profile_datasource.dart';
+import 'package:real_estate/features/profile_page/data/repositories/profile_data_repository_impl.dart';
+import 'package:real_estate/features/profile_page/domain/repository/profile_page_repository.dart';
+import 'package:real_estate/features/profile_page/domain/usecases/get_profile_data_usecase.dart';
+import 'package:real_estate/features/profile_page/domain/usecases/update_profile_data_usecase.dart';
+import 'package:real_estate/features/profile_page/presentation/cubit/profile_page_cubit.dart';
 import 'package:real_estate/features/home/data/datasources/home-remote-datasource.dart';
 import 'package:real_estate/features/home/data/repos/home_repo_impl.dart';
 import 'package:real_estate/features/home/data/repos/property_repo_impl.dart';
@@ -60,6 +83,7 @@ Future<void> initAppModule() async {
     () => NetworkInfoImpl(getIt<InternetConnectionChecker>()),
   );
 
+  // 1. Auth Module
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
   );
@@ -87,32 +111,110 @@ Future<void> initAppModule() async {
     ),
   );
 
+  // 2. Profile Module
+  getIt.registerLazySingleton<ProfileDatasource>(
+    () => ProfileDatasource(supabase: getIt()),
+  );
 
+  getIt.registerLazySingleton<ProfileDataRepository>(
+    () => ProfileDataRepositoryImpl(networkInfo: getIt(), datasource: getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => GetProfileDataUsecase(repository: getIt<ProfileDataRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => UpdateProfileUseCase(repository: getIt<ProfileDataRepository>()),
+  );
+
+  getIt.registerFactory<ProfilePageCubit>(
+    () => ProfilePageCubit(
+      getProfileDataUsecase: getIt<GetProfileDataUsecase>(),
+      updateProfileUseCase: getIt<UpdateProfileUseCase>(),
+    ),
+  );
+
+getIt.registerLazySingleton<MapRemoteDataSource>(
+    () => MapRemoteDataSourceImpl(supabaseClient: getIt<SupabaseClient>()),
+  );
+  
+
+ getIt.registerLazySingleton<MapRepository>(
+    () => MapRepositoryImpl(
+      remoteDataSource: getIt<MapRemoteDataSource>(),
+      networkInfo: getIt<NetworkInfo>(),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => GetPropertyLocationsUseCase(getIt<MapRepository>()), 
+      );
+
+  getIt.registerFactory(
+    () => MapCubit(
+      getPropertyLocationsUseCase: getIt<GetPropertyLocationsUseCase>(),
+    ),
+  );
+  // 3. Booking Module (Payment)
+  getIt.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(supabaseClient: getIt()),
+  );
+
+  getIt.registerLazySingleton<BookingRepository>(
+    () => BookingRepositoryImpl(remoteDataSource: getIt()),
+  );
+
+  getIt.registerLazySingleton(() => CreateBookingUseCase(getIt()));
+
+  getIt.registerFactory<BookingCubit>(
+    () => BookingCubit(createBookingUseCase: getIt()),
+  );
+
+  // 4. Home & Property Module
   getIt.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(supabaseClient: getIt()),
   );
 
-  // 3. Repositories
   getIt.registerLazySingleton<HomeRepository>(
     () => HomeRepositoryImpl(remoteDataSource: getIt()),
   );
 
-  // 4. Use Cases
   getIt.registerLazySingleton(() => GetPropertiesUseCase(getIt()));
 
   getIt.registerFactory(() => HomeCubit(getPropertiesUseCase: getIt()));
 
-
-getIt.registerLazySingleton<PropertyDetailsRepository>(
+  getIt.registerLazySingleton<PropertyDetailsRepository>(
     () => PropertyDetailsRepositoryImpl(getIt<SupabaseClient>()),
   );
 
-  getIt.registerLazySingleton(() => GetPropertyDetailsUseCase(getIt<PropertyDetailsRepository>()));
+  getIt.registerLazySingleton(
+    () => GetPropertyDetailsUseCase(getIt<PropertyDetailsRepository>()),
+  );
 
-  // 3. Cubit
-getIt.registerFactory(() => PropertyDetailsCubit(
-        getPropertyDetailsUseCase: getIt<GetPropertyDetailsUseCase>(),
-        propertyDetailsRepository: getIt<PropertyDetailsRepository>(), 
-              ));
+  getIt.registerFactory(
+    () => PropertyDetailsCubit(
+      getPropertyDetailsUseCase: getIt<GetPropertyDetailsUseCase>(),
+      propertyDetailsRepository: getIt<PropertyDetailsRepository>(),
+    ),
+  );
+
+
+ getIt.registerLazySingleton<FavoritesRemoteDataSource>(
+  () => FavoritesRemoteDataSourceImpl(getIt<SupabaseClient>()),
+);
+
+// 2. Repository
+getIt.registerLazySingleton<FavoritesRepository>(
+  () => FavoritesRepositoryImpl(getIt<FavoritesRemoteDataSource>()),
+);
+
+getIt.registerLazySingleton(() => GetFavoritesUseCase(getIt<FavoritesRepository>()));
+getIt.registerLazySingleton(() => AddToFavoritesUseCase(getIt<FavoritesRepository>()));
+getIt.registerLazySingleton(() => RemoveFromFavoritesUseCase(getIt<FavoritesRepository>()));
+
+getIt.registerFactory(() => FavoritesCubit(
+  getIt<GetFavoritesUseCase>(),
+  getIt<AddToFavoritesUseCase>(),
+ // getIt<RemoveFromFavoritesUseCase>(),
+));
 
 }

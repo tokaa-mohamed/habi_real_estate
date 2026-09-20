@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate/core/utils/app_colors.dart';
 import 'package:real_estate/core/utils/app_styles.dart';
+import 'package:real_estate/features/favs/presentation/screens/fav_screen.dart';
 import 'package:real_estate/features/home/presentation/widgets/category-list.dart';
-import 'package:real_estate/features/home/presentation/widgets/custom_nav_bar.dart';
 import 'package:real_estate/features/home/presentation/widgets/property_card.dart';
+import 'package:real_estate/features/home/presentation/widgets/custom_nav_bar.dart'; // استدعاء ملف الـ Nav Bar بتاعك
+import 'package:real_estate/features/map/presentation/pages/property_map_page.dart'; // شاشة الخريطة
+import 'package:real_estate/features/profile_page/presentation/pages/profile_page.dart'; // شاشة البروفايل
 import '../../../../core/di.dart'; 
 import '../cubit/home_cubit.dart';
 import '../widgets/home_header.dart';
@@ -22,13 +25,49 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+
+  _buildHomeBodyContent(), // Index 0 -> الهوم
+      const FavoritesScreen(),   // Index 1 -> المفضلة
+      const PropertyMapPage(),   // Index 2 -> الخريطة
+      const Scaffold(body: Center(child: Text('History Page'))), 
+            const ProfilePage(),    
+          ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()..fetchProperties(),
-      child: Scaffold(
-        backgroundColor: AppColors.scaffoldBackground,
-        body: SafeArea(
+      child: Scaffold( 
+                backgroundColor: AppColors.scaffoldBackground,
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _screens,
+        ),
+        bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index; 
+                          });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHomeBodyContent() {
+    return Material(
+      color: AppColors.scaffoldBackground,
+      child: Container(
+        color: AppColors.scaffoldBackground,
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -118,14 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: CustomBottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
         ),
       ),
     );

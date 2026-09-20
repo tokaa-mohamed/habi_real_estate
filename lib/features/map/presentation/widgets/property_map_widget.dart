@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:real_estate/core/routes/app_router.gr.dart';
 import 'package:real_estate/features/map/presentation/widgets/map_maker_widget.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../domain/entities/property_location_entity.dart';
@@ -53,7 +55,15 @@ class _PropertyMapWidgetState extends State<PropertyMapWidget> {
   }
 
   void _recenterTo(double lat, double lng, {double? zoom}) {
-    _mapController.move(LatLng(lat, lng), zoom ?? widget.initialZoom);
+
+context.router.push(
+      PropertyMapRoute(
+        initialLat: _activeProperty?.latitude ?? 30.0444,
+        initialLong: _activeProperty?.longitude ?? 31.2357,
+        initialTitle: _activeProperty?.title ?? 'Property Map',
+        initialLocation: _activeProperty?.location ?? '',
+      ),
+    );    
   }
 
   void _zoomIn() {
