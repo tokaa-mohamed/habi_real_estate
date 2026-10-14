@@ -1,4 +1,4 @@
-#  Habi Real Estate (حَابي) - Real Estate & Property Discovery Application
+#  Habi Real Estate  - Real Estate & Property Discovery Application
 
 > A feature-rich, scalable, and high-performance cross-platform real estate mobile application built with Flutter, leveraging a robust feature-based architecture, Cubit for predictable state management, Supabase as a modern Backend-as-a-Service, and Auto Route for type-safe navigation.
 
