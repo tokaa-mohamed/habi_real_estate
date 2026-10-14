@@ -1,74 +1,67 @@
- Habi (حابي) - Advanced Real Estate Mobile Application
+#  Habi Real Estate (حَابي) - Real Estate & Property Discovery Application
 
-A feature-rich, scalable, and high-performance cross-platform real estate mobile application built with Flutter, leveraging a robust feature-based architecture, Cubit for predictable state management, Supabase as a Backend-as-a-Service, and Auto Route for type-safe navigation.
+> A feature-rich, scalable, and high-performance cross-platform real estate mobile application built with Flutter, leveraging a robust feature-based architecture, Cubit for predictable state management, Supabase as a modern Backend-as-a-Service, and Auto Route for type-safe navigation.
 
-🌟 Table of Contents
+---
 
-About The Project
+##  Table of Contents
+- [About The Project](#-about-the-project)
+- [Architecture & Design Patterns](#-architecture--design-patterns)
+- [Tech Stack & Tooling](#-tech-stack--tooling)
+- [App User Flows & Screens](#-app-user-flows--screens)
+- [Key Features](#-key-features)
+- [Project Structure (Feature-Based)](#-project-structure-feature-based)
+- [Author & Team](#-author--team)
 
-Architecture & Design Patterns
+---
 
-Tech Stack & Tooling
+##  About The Project
 
-App User Flows & Screens
+**Habi Real Estate** is a modern property discovery platform designed to connect real estate buyers, sellers, and renters. Developed collaboratively by an engineering team, the app streamlines property searching, interactive map exploration, virtual property details, user ratings/reviews, and secure payment processing.
 
-Key Features
+---
 
-Project Structure (Feature-Based)
+## Architecture & Design Patterns
 
-Author & Team
+* **Feature-Based Architecture:** The project codebase is strictly modularized by features (e.g., auth, properties, map, payment, profile), ensuring high maintainability, scalability, and clean separation of concerns among team members.
+* **State Management & Backend:** Built using **Cubit** to manage UI states reactively and predictably across all features, paired with **Supabase** as the backend layer for real-time data synchronization, authentication, storage, and database management.
+* **Navigation:** Powered by **Auto Route** for type-safe routing and deep-linking capabilities across complex screen hierarchies.
 
- About The Project
+---
 
-Habi is a comprehensive real estate ecosystem designed to connect property seekers with listings through a seamless mobile interface. Developed collaboratively by a skilled engineering team, the application handles the entire real estate discovery process, including secure user authentication, dynamic property catalog exploration, interactive map navigation, detailed property specifications, user ratings, and integrated payment checkout workflows.
+##  Tech Stack & Tooling
 
- Architecture & Design Patterns
+* **Framework:** Flutter (Dart)
+* **State Management:** Flutter Cubit (Bloc library)
+* **Backend & Database:** Supabase (Database, Authentication, Storage)
+* **Routing:** `auto_route` (Type-safe navigation generator)
+* **Maps & Location:** Interactive Google Maps / Map services integration
+* **UI/UX Adaptation:** Responsive layouts tailored for diverse mobile viewports.
 
-Feature-Based Architecture: The project codebase is strictly modularized by features (e.g., auth, home, property, map, payment), ensuring high maintainability, scalability, and clean separation of concerns among team members.
+---
 
-State Management & Backend: Built using Cubit to manage UI states reactively and predictably across all features, paired with Supabase as the primary Backend-as-a-Service for real-time PostgreSQL database interactions, authentication, and cloud storage management.
-
-Navigation: Powered by Auto Route for type-safe routing and deep-linking capabilities across complex screen hierarchies.
-
- Tech Stack & Tooling
-
-Framework: Flutter (Dart)
-
-State Management: Flutter Cubit (Bloc library)
-
-Backend & Database: Supabase (PostgreSQL Database, Authentication, and Cloud Storage)
-
-Routing: auto_route (Type-safe navigation generator)
-
-Maps & Location Services: Map integration services for real-time property location tracking
-
-UI/UX Adaptation: Responsive layouts tailored for diverse mobile viewports.
-
- App User Flows & Screens
+##  App User Flows & Screens
 
 The application is structured around intuitive and user-centric flows:
+1. **Onboarding & Authentication:** Splash screen, interactive onboarding slides, secure Sign In, Sign Up, and OTP recovery.
+2. **Property Exploration & Discovery:** Dynamic Home screen, interactive map view, advanced category filtering, property detail showcases, and user review modules.
+3. **Transaction & Payment:** Secure payment workflow, reservation steps, and confirmation screens.
+4. **User Profile & Settings:** Profile management, saved listings/favorites, and account settings.
 
-Onboarding & Authentication: Splash screen, interactive onboarding slides, secure Sign In, Sign Up, and account setup backed by Supabase Auth.
+---
 
-Property Discovery & Exploration: Dynamic Home dashboard, featured properties, detailed property specifications, house exploration feeds, and user review modules.
+##  Project Structure (Feature-Based)
 
-Map & Geographical Navigation: Interactive location-based maps for visual property discovery and area filtering.
-
-Checkout & Payment Management: Multi-step booking and payment details workflow, summary confirmation, and order completion screens.
-
-User Dashboard & Preferences: Secondary screens for user profile management, saved listings, and application settings.
-
- Project Structure (Feature-Based)
-
-habi-real-estate/
+```text
+habi-app/
 ├── lib/
-│   ├── core/                # Core utilities, Supabase configuration, themes, routes
+│   ├── core/                # Core utilities, Supabase client configuration, themes, routes
 │   ├── features/            # Feature-first modular structure
-│   │   ├── auth/            # Login, Register, Profile setup (Cubit + Supabase services)
-│   │   ├── home/            # Dashboard, Featured listings, Categories
-│   │   ├── property/        # Property details, Virtual explore, Reviews
-│   │   ├── map/             # Interactive map and location-based discovery
-│   │   ├── payment/         # Checkout flow, Payment details, Confirmation
-│   │   └── profile/         # User profile management and settings
+│   │   ├── auth/            # Login, Register, Forgot Password (Cubit + Supabase)
+│   │   ├── home/            # Listing, Discovery, Categories
+│   │   ├── property/        # Property details, reviews, media gallery
+│   │   ├── map/             # Interactive map search and location pins
+│   │   ├── payment/         # Booking flow & payment gateways
+│   │   └── profile/         # User profile & saved favorites
 │   └── main.dart
 └── pubspec.yaml
