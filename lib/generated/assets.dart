@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Assets {
   Assets._();
 
+  static const SvgGenImage logo = SvgGenImage('assets/logo.svg');
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
 }
@@ -16,8 +17,11 @@ class $AssetsIconsGen {
   final SvgGenImage bedroomIcon = const SvgGenImage(
     'assets/icons/Bedroom-icon.svg',
   );
-  final SvgGenImage appleIcon = const SvgGenImage(
+  final SvgGenImage appleIconSvg = const SvgGenImage(
     'assets/icons/apple-icon.svg',
+  );
+  final SvgGenImage appleIconSvg1 = const SvgGenImage(
+    'assets/icons/apple_icon.svg',
   );
   final SvgGenImage arrowLeft = const SvgGenImage(
     'assets/icons/arrow-left.svg',
@@ -49,8 +53,11 @@ class $AssetsIconsGen {
   final SvgGenImage fluentChat = const SvgGenImage(
     'assets/icons/fluent-chat.svg',
   );
-  final AssetGenImage googleIcon = const AssetGenImage(
+  final AssetGenImage googleIconPng = const AssetGenImage(
     'assets/icons/google-icon.png',
+  );
+  final SvgGenImage googleIconSvg = const SvgGenImage(
+    'assets/icons/google_icon.svg',
   );
   final SvgGenImage greenCheckIcon = const SvgGenImage(
     'assets/icons/green-check-icon.svg',
@@ -96,7 +103,6 @@ class $AssetsIconsGen {
   final SvgGenImage signInIcon = const SvgGenImage(
     'assets/icons/sign-in-icon.svg',
   );
-  final SvgGenImage splash = const SvgGenImage('assets/icons/splash.svg');
   final SvgGenImage starIcon = const SvgGenImage('assets/icons/star-icon.svg');
   final SvgGenImage timeIcon = const SvgGenImage('assets/icons/time-icon.svg');
   final SvgGenImage travelIcon = const SvgGenImage(
@@ -249,10 +255,6 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      color: color,
-      colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
     );
   }
 

@@ -26,6 +26,7 @@ class NetworkFailure extends Failure {
   const NetworkFailure({super.message = 'No internet connection'});
 }
 
+
 class UnknownFailure extends Failure {
   const UnknownFailure({required super.message});
 }

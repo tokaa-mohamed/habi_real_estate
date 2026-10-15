@@ -7,7 +7,8 @@ class FontWeightManager {
 
 class AppFonts {
   // Font families
-  static const String questFont = 'Quest';
+  static const String fontFamily = 'Poppins';
+  static const String poppinsFont = 'Poppins';
 
   // Font sizes
   static const double displayLarge = 57;
